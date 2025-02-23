@@ -1,7 +1,7 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import pool from '@/lib/db'; // Adjust the import based on your database connection setup
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+import { NextResponse } from 'next/server';
+import pool from '@/lib/db';
+ 
+export async function GET() {
   try {
     const courses = await pool.query(`
       SELECT * FROM courses 
@@ -10,9 +10,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       LIMIT 5
     `);
 
-    res.status(200).json(courses);
+    return NextResponse.json(courses);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    return NextResponse.json(
+      { message: 'Internal Server Error' },
+      { status: 500 }
+    );
   }
 }
