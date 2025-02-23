@@ -1,0 +1,188 @@
+-- Create the courses table (unchanged)
+CREATE TABLE courses (
+    course_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_code VARCHAR(20) NOT NULL UNIQUE,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    duration_months INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    department VARCHAR(100) NOT NULL,
+    category ENUM('adults', 'kids') NOT NULL,
+    image_url VARCHAR(255),
+    program_type VARCHAR(100) NOT NULL,
+    num_lectures INT NOT NULL,
+    skill_level ENUM('beginner', 'intermediate', 'advanced') NOT NULL,
+    languages VARCHAR(255) NOT NULL,
+    class_days VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Create the curriculum table (unchanged)
+CREATE TABLE curriculum (
+    curriculum_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_id INT NOT NULL,
+    week_number INT NOT NULL,
+    topic VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    learning_objectives TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE,
+    UNIQUE KEY unique_week_per_course (course_id, week_number)
+);
+
+-- Create the gallery table (unchanged)
+CREATE TABLE gallery (
+    gallery_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_id INT NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+    image_title VARCHAR(100),
+    image_description TEXT,
+    image_type ENUM('cover', 'banner', 'content', 'thumbnail') NOT NULL,
+    display_order INT,
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE,
+    INDEX idx_course_images (course_id, is_active)
+);
+
+-- Create the notice_board table
+CREATE TABLE notice_board (
+    notice_id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    author VARCHAR(100),
+    priority ENUM('low', 'medium', 'high') DEFAULT 'medium',
+    publish_date DATE NOT NULL,
+    expiry_date DATE,
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_active_notices (is_active, publish_date, expiry_date)
+);
+
+-- Create the downloadable_files table
+CREATE TABLE downloadable_files (
+  file_id INT AUTO_INCREMENT PRIMARY KEY,
+  file_name VARCHAR(255) NOT NULL,
+  file_url VARCHAR(512) NOT NULL,
+  file_type VARCHAR(100),
+  file_size INT,
+  description TEXT,
+  course_id INT,
+  upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE
+);
+
+
+-- Create graduates table
+CREATE TABLE graduates (
+    graduate_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_id INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    cell_number VARCHAR(20),
+    year_of_completion YEAR NOT NULL,
+    period_of_study VARCHAR(50) NOT NULL,
+    graduate_image_url VARCHAR(205) NOT NULL,
+    final_score DECIMAL(5,2),
+    certificate_number VARCHAR(50) UNIQUE NOT NULL,
+    certificate_file_url VARCHAR(191),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id),
+    INDEX idx_year_completion (year_of_completion)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Create projects table
+CREATE TABLE projects (
+    project_id INT PRIMARY KEY AUTO_INCREMENT,
+    graduate_id INT NOT NULL,
+    project_title VARCHAR(100) NOT NULL,
+    description TEXT,
+    project_url VARCHAR(191),
+    github_url VARCHAR(191),
+    technologies_used TEXT,
+    completion_date DATE,
+    is_featured BOOLEAN DEFAULT false,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (graduate_id) REFERENCES graduates(graduate_id),
+    INDEX idx_featured (is_featured)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Create social links table
+CREATE TABLE social_links (
+    link_id INT PRIMARY KEY AUTO_INCREMENT,
+    graduate_id INT NOT NULL,
+    platform ENUM('github', 'linkedin', 'twitter', 'portfolio', 'other') NOT NULL,
+    url VARCHAR(191) NOT NULL,
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (graduate_id) REFERENCES graduates(graduate_id),
+    UNIQUE KEY unique_graduate_platform (graduate_id, platform)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Create applications table
+CREATE TABLE applications (
+    application_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_id INT NOT NULL,
+    student_type ENUM('child', 'adult') NOT NULL,
+    study_mode VARCHAR(50) NOT NULL,
+    
+    -- Personal Information
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    other_names VARCHAR(100),
+    gender ENUM('male', 'female', 'other') NOT NULL,
+    
+    -- Additional Information
+    marital_status ENUM('single', 'married', 'divorced', 'widowed'),
+    date_of_birth DATE NOT NULL,
+    nationality VARCHAR(100) NOT NULL,
+    id_number VARCHAR(100) NOT NULL,
+    
+    -- Academic Information
+    academic_year VARCHAR(20) NOT NULL,
+    intake ENUM('january', 'may', 'september') NOT NULL,
+    
+    -- Contact Information
+    email VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(50) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    
+    -- Application Status
+    status ENUM('pending', 'approved', 'rejected', 'waitlisted') DEFAULT 'pending',
+    application_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    reviewed_by INT,
+    review_date TIMESTAMP NULL,
+    review_notes TEXT,
+
+    -- Indexes and Foreign Keys
+    FOREIGN KEY (course_id) REFERENCES courses(course_id),
+    INDEX idx_status (status),
+    INDEX idx_application_date (application_date),
+    INDEX idx_email (email)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Create the course_resources table
+CREATE TABLE course_resources (
+    resource_id INT PRIMARY KEY AUTO_INCREMENT,
+    course_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    file_url VARCHAR(255) NOT NULL COMMENT 'URL of the file hosted on Cloudinary',
+    file_type ENUM('video', 'document', 'audio', 'other') NOT NULL COMMENT 'Type of resource',
+    file_size INT COMMENT 'Size of the file in bytes',
+    description TEXT COMMENT 'Optional description of the resource',
+    upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Date when the resource was uploaded',
+    is_public BOOLEAN DEFAULT false COMMENT 'Whether the resource is publicly accessible',
+    is_active BOOLEAN DEFAULT true COMMENT 'Whether the resource is currently active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE,
+    INDEX idx_course_resources (course_id, is_active),
+    INDEX idx_public_resources (is_public, is_active)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
