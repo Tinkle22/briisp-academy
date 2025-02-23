@@ -12,8 +12,18 @@ type Course = {
   name: string;
   description: string;
   duration: string;
-  level: string; // Add other properties as needed
-  // ... other properties ...
+  level: string;
+};
+
+// Map course types to icons
+const courseIcons: { [key: string]: any } = {
+  'Programming': Code,
+  'Networking': Network,
+  'Security': Shield,
+  'Mobile Development': Smartphone,
+  'Game Development': Gamepad,
+  'Database': Database,
+  'default': Code
 };
 
 const ComputerSciencePage = () => {
@@ -34,12 +44,21 @@ const ComputerSciencePage = () => {
     fetchCourses();
   }, []);
 
+  // Helper function to get icon component
+  const getIconForCourse = (courseName: string) => {
+    // You can implement your own logic to match course names to icons
+    const iconKey = Object.keys(courseIcons).find(key => 
+      courseName.toLowerCase().includes(key.toLowerCase())
+    ) || 'default';
+    return courseIcons[iconKey];
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <div className="relative">
         <img
-          src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+          src="/api/placeholder/2070/400"
           alt="Computer Science"
           className="w-full h-[400px] object-cover"
         />
@@ -104,50 +123,53 @@ const ComputerSciencePage = () => {
         <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8">Our Courses</h2>
           <div className="grid grid-cols-1 gap-4">
-            {courses.map((course) => (
-              <Card key={course.course_id} className="overflow-hidden">
-                <button
-                  onClick={() => setExpandedCourse(expandedCourse === course.course_id ? null : course.course_id)}
-                  className="w-full"
-                >
-                  <div className="p-6 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="p-3 rounded-lg bg-blue-600/10">
-                        <course.icon className="h-6 w-6 text-amber-600" />
-                      </div>
-                      <div className="text-left">
-                        <h3 className="font-semibold">{course.name}</h3>
-                        <p className="text-sm text-muted-foreground">{course.description}</p>
-                      </div>
-                    </div>
-                    <ChevronDown
-                      className={`h-5 w-5 transition-transform ${
-                        expandedCourse === course.course_id ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </div>
-                </button>
-                {expandedCourse === course.course_id && (
-                  <div className="px-6 pb-6 pt-2 border-t">
-                    <div className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <p className="text-sm font-medium">Duration</p>
-                          <p className="text-sm text-muted-foreground">{course.duration}</p>
+            {courses.map((course) => {
+              const IconComponent = getIconForCourse(course.name);
+              return (
+                <Card key={course.course_id} className="overflow-hidden">
+                  <button
+                    onClick={() => setExpandedCourse(expandedCourse === course.course_id ? null : course.course_id)}
+                    className="w-full"
+                  >
+                    <div className="p-6 flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="p-3 rounded-lg bg-blue-600/10">
+                          <IconComponent className="h-6 w-6 text-amber-600" />
                         </div>
-                        <div>
-                          <p className="text-sm font-medium">Level</p>
-                          <p className="text-sm text-muted-foreground">{course.level}</p>
+                        <div className="text-left">
+                          <h3 className="font-semibold">{course.name}</h3>
+                          <p className="text-sm text-muted-foreground">{course.description}</p>
                         </div>
                       </div>
-                      <Button className="w-full bg-amber-600 hover:bg-amber-700" asChild>
-                        <Link href={`/courses/${course.course_id}`}>Learn More</Link>
-                      </Button>
+                      <ChevronDown
+                        className={`h-5 w-5 transition-transform ${
+                          expandedCourse === course.course_id ? 'rotate-180' : ''
+                        }`}
+                      />
                     </div>
-                  </div>
-                )}
-              </Card>
-            ))}
+                  </button>
+                  {expandedCourse === course.course_id && (
+                    <div className="px-6 pb-6 pt-2 border-t">
+                      <div className="space-y-4">
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <p className="text-sm font-medium">Duration</p>
+                            <p className="text-sm text-muted-foreground">{course.duration}</p>
+                          </div>
+                          <div>
+                            <p className="text-sm font-medium">Level</p>
+                            <p className="text-sm text-muted-foreground">{course.level}</p>
+                          </div>
+                        </div>
+                        <Button className="w-full bg-amber-600 hover:bg-amber-700" asChild>
+                          <Link href={`/courses/${course.course_id}`}>Learn More</Link>
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                </Card>
+              );
+            })}
           </div>
         </div>
 
