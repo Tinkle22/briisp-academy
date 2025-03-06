@@ -160,6 +160,13 @@ export default function Navbar() {
             <span className="sr-only">Open main menu</span>
             <Menu className="h-6 w-6" aria-hidden="true" />
           </Button>
+          <Button
+            variant="primary"
+            className="rounded-md"
+            onClick={() => window.location.href = '/login'}
+          >
+            Portal
+          </Button>
         </div>
       </nav>
 

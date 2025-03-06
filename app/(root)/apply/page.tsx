@@ -132,7 +132,7 @@ const ApplicationForm = () => {
       });
 
       // Redirect to success page or show success message
-      router.push('/apply/success');
+      router.push('/');
     } catch (error) {
       console.error('Error submitting application:', error);
       toast({

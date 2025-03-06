@@ -186,3 +186,55 @@ CREATE TABLE course_resources (
     INDEX idx_course_resources (course_id, is_active),
     INDEX idx_public_resources (is_public, is_active)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL COMMENT 'Hashed password',
+    is_active BOOLEAN DEFAULT true COMMENT 'Account status',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_email (email)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+
+CREATE TABLE user_course_enrollments (
+    enrollment_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    course_id INT NOT NULL,
+    enrollment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'Date of enrollment',
+    status ENUM('active', 'completed', 'dropped') DEFAULT 'active' COMMENT 'Enrollment status',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE,
+    UNIQUE KEY unique_enrollment (user_id, course_id) COMMENT 'Prevents duplicate enrollments',
+    INDEX idx_user_enrollments (user_id),
+    INDEX idx_course_enrollments (course_id)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Create the results table
+CREATE TABLE results (
+    result_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    course_id INT NOT NULL,
+    enrollment_id INT NOT NULL COMMENT 'Links to the specific enrollment record',
+    assessment_type ENUM('quiz', 'exam', 'assignment', 'project', 'final') NOT NULL COMMENT 'Type of assessment',
+    assessment_title VARCHAR(255) NOT NULL COMMENT 'Name or title of the assessment',
+    score DECIMAL(5,2) NOT NULL COMMENT 'Score achieved (e.g., out of 100)',
+    max_score DECIMAL(5,2) NOT NULL DEFAULT 100.00 COMMENT 'Maximum possible score',
+    result_date DATE NOT NULL COMMENT 'Date the result was recorded',
+    comments TEXT COMMENT 'Optional feedback or notes',
+    is_passed BOOLEAN DEFAULT false COMMENT 'Indicates if the user passed the assessment',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id) ON DELETE CASCADE,
+    FOREIGN KEY (enrollment_id) REFERENCES user_course_enrollments(enrollment_id) ON DELETE CASCADE,
+    INDEX idx_user_results (user_id, course_id),
+    INDEX idx_enrollment_results (enrollment_id),
+    INDEX idx_result_date (result_date)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
