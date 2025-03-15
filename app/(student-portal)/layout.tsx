@@ -33,27 +33,9 @@ export default function StudentPortalLayout({
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const response = await fetch('/api/auth/check', {
-          credentials: 'include',
-        });
-        
-        if (!response.ok) {
-          router.push('/login');
-        }
-      } catch (error) {
-        router.push('/login');
-      } finally {
-        setIsLoading(false);
-      }
-    };
 
-    checkAuth();
-  }, [router]);
 
   const handleLogout = async () => {
     try {
