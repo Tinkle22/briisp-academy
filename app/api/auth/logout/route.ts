@@ -1,16 +1,15 @@
 import { NextResponse } from 'next/server';
 
 export async function POST() {
-  // Create a response to clear the auth token cookie
-  const response = NextResponse.json({ success: true });
-
-  // Clear the auth-token cookie
-  response.cookies.set('auth-token', '', {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'strict',
-    maxAge: -1, // Set maxAge to -1 to delete the cookie
-  });
-
-  return response;
+  try {
+    // In a more complex setup with server-side sessions, you would invalidate the session here
+    
+    return NextResponse.json({ message: 'Logged out successfully' });
+  } catch (error) {
+    console.error('Logout error:', error);
+    return NextResponse.json(
+      { message: 'An error occurred during logout' },
+      { status: 500 }
+    );
+  }
 }

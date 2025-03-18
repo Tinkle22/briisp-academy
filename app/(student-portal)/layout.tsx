@@ -1,6 +1,6 @@
 'use client';
-import './globals.css';
-import { useState, useEffect } from 'react';
+
+import { useState } from 'react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import {
@@ -17,7 +17,6 @@ import {
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 
-
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Apply for other ', href: '/registration', icon: ClipboardList },
@@ -33,25 +32,21 @@ export default function StudentPortalLayout({
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-
-
 
   const handleLogout = async () => {
     try {
+      setIsLoading(true);
       await fetch('/api/auth/logout', {
         method: 'POST',
         credentials: 'include',
       });
-      router.push('/login');
+      router.replace('/login');
     } catch (error) {
       console.error('Logout failed:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -118,4 +113,8 @@ export default function StudentPortalLayout({
       </div>
     </div>
   );
+}
+
+function setIsLoading(arg0: boolean) {
+  throw new Error('Function not implemented.');
 }

@@ -1,32 +1,77 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 import pool from '@/lib/db';
-import { RowDataPacket } from 'mysql2/promise';
 
-interface Enrollment extends RowDataPacket {
-  enrollment_id: number;
-  user_id: number;
-  course_id: number;
-  status: string;
-}
-
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    const { searchParams } = new URL(request.url);
-    const userId = searchParams.get('userId');
-    const courseId = searchParams.get('courseId');
+    const cookieStore = cookies();
+    const sessionCookie = cookieStore.get('session');
 
-    if (!userId || !courseId) {
-      return NextResponse.json({ error: 'Missing required parameters' }, { status: 400 });
+    if (!sessionCookie) {
+      return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
     }
 
-    const [enrollments] = await pool.query<Enrollment[]>(
-      'SELECT * FROM user_course_enrollments WHERE user_id = ? AND course_id = ? AND status = \'active\'',
-      [userId, courseId]
-    );
+    const session = JSON.parse(sessionCookie.value);
+    const userId = session.user_id;
 
-    return NextResponse.json(enrollments[0] || null);
+    const query = `
+      SELECT 
+        uce.enrollment_id,
+        uce.user_id,
+        uce.status,
+        uce.enrollment_date,
+        c.course_id,
+        c.title as course_title,
+        c.course_code,
+        c.description,
+        c.duration_months,
+        c.price,
+        c.department,
+        c.category,
+        c.image_url,
+        c.program_type,
+        c.num_lectures,
+        c.skill_level,
+        c.languages,
+        c.class_days
+      FROM user_course_enrollments uce
+      JOIN courses c ON uce.course_id = c.course_id
+      WHERE uce.user_id = ?
+      ORDER BY uce.enrollment_date DESC
+    `;
+
+    const [rows] = await pool.query(query, [userId]);
+
+    // Transform the data to match the expected structure
+    const enrollments = (rows as any[]).map(row => ({
+      enrollment_id: row.enrollment_id,
+      user_id: row.user_id,
+      status: row.status,
+      enrollment_date: row.enrollment_date,
+      course: {
+        course_id: row.course_id,
+        title: row.course_title,
+        course_code: row.course_code,
+        description: row.description,
+        duration_months: row.duration_months,
+        price: row.price,
+        department: row.department,
+        category: row.category,
+        image_url: row.image_url,
+        program_type: row.program_type,
+        num_lectures: row.num_lectures,
+        skill_level: row.skill_level,
+        languages: row.languages,
+        class_days: row.class_days
+      }
+    }));
+
+    return NextResponse.json(enrollments);
   } catch (error) {
-    console.error('Error fetching enrollment:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    console.error('Error fetching enrollments:', error);
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 }
+    );
   }
-} 
+}

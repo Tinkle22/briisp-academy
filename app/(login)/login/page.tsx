@@ -1,45 +1,49 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card } from '@/components/ui/card';
-import { GraduationCap, Eye, EyeOff } from 'lucide-react';
-import Link from 'next/link';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import { GraduationCap, Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-  
+    setIsLoading(true);
+    setError("");
+
     try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-  
+
       const data = await response.json();
-  
-      if (response.ok) {
-        router.push('/dashboard');
-      } else {
-        setError(data.error || 'Login failed');
+
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
       }
+
+      // Redirect to dashboard on success
+      router.push("/dashboard");
     } catch (err) {
-      setError('An error occurred during login');
+      setError(err instanceof Error ? err.message : "An error occurred");
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  // Update the form element to include onSubmit
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-[1200px] grid lg:grid-cols-2 gap-8 items-center">
@@ -59,10 +63,8 @@ export default function LoginPage() {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              {error && (
-                <div className="text-red-600 text-sm">{error}</div>
-              )}
-              
+              {error && <div className="text-red-600 text-sm">{error}</div>}
+
               <div className="space-y-2">
                 <label htmlFor="email" className="text-sm font-medium">
                   Email
@@ -85,7 +87,7 @@ export default function LoginPage() {
                 <div className="relative">
                   <Input
                     id="password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
@@ -109,7 +111,9 @@ export default function LoginPage() {
               <div className="flex items-center justify-between">
                 <label className="flex items-center gap-2">
                   <input type="checkbox" className="rounded border-gray-300" />
-                  <span className="text-sm text-muted-foreground">Remember me</span>
+                  <span className="text-sm text-muted-foreground">
+                    Remember me
+                  </span>
                 </label>
                 <Link
                   href="/forgot-password"
@@ -119,11 +123,14 @@ export default function LoginPage() {
                 </Link>
               </div>
 
-              <Button type="submit" className="w-full bg-amber-600 hover:bg-amber-700">
-                Sign in
+              <Button
+                type="submit"
+                className="w-full bg-amber-600 hover:bg-amber-700"
+                disabled={isLoading}
+              >
+                {isLoading ? "Signing in..." : "Sign in"}
               </Button>
             </form>
-
           </div>
         </Card>
 
@@ -137,10 +144,12 @@ export default function LoginPage() {
           <div className="absolute inset-0 bg-amber-600/20 backdrop-blur-sm"></div>
           <div className="absolute inset-0 flex items-center justify-center p-12">
             <Card className="w-full max-w-md p-6 bg-background backdrop-blur-sm">
-              <h2 className="text-xl font-semibold mb-4">Welcome to Briisp Dashboard</h2>
+              <h2 className="text-xl font-semibold mb-4">
+                Welcome to Briisp Dashboard
+              </h2>
               <p className="text-muted-foreground">
-                Access your personalized student dashboard
-                and stay connected with your courses.
+                Access your personalized student dashboard and stay connected
+                with your courses.
               </p>
             </Card>
           </div>

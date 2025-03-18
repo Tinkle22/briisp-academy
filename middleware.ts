@@ -1,32 +1,23 @@
 import { NextResponse } from 'next/server';
-import { jwtVerify } from 'jose';
 import type { NextRequest } from 'next/server';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+export function middleware(request: NextRequest) {
+  const session = request.cookies.get('session');
+  const isAuthPage = request.nextUrl.pathname.startsWith('/login');
 
-export async function middleware(request: NextRequest) {
-  const token = request.cookies.get('auth-token');
+  if (!session && !isAuthPage) {
+    // Redirect to login if no session and trying to access protected route
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
 
-  // Check if the request is for the student portal
-  if (request.nextUrl.pathname.startsWith('/(student-portal)')) {
-    if (!token) {
-      return NextResponse.redirect(new URL('/login', request.url));
-    }
-
-    try {
-      await jwtVerify(
-        token.value,
-        new TextEncoder().encode(JWT_SECRET)
-      );
-      return NextResponse.next();
-    } catch (error) {
-      return NextResponse.redirect(new URL('/login', request.url));
-    }
+  if (session && isAuthPage) {
+    // Redirect to dashboard if has session and trying to access login
+    return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/(student-portal)/:path*']
-}; 
+  matcher: ['/dashboard/:path*', '/login']
+};
