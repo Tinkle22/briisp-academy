@@ -161,7 +161,7 @@ export default function Navbar() {
             <Menu className="h-6 w-6" aria-hidden="true" />
           </Button>
           <Button
-            variant="primary"
+            variant="default"
             className="rounded-md"
             onClick={() => window.location.href = '/login'}
           >
