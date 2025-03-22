@@ -13,6 +13,7 @@ import {
   Clock,
   LogOut,
   Menu,
+  Loader2,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
@@ -31,16 +32,23 @@ export default function StudentPortalLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const handleLogout = async () => {
     try {
       setIsLoading(true);
-      await fetch('/api/auth/logout', {
+      const response = await fetch('/api/auth/logout', {
         method: 'POST',
         credentials: 'include',
       });
-      router.replace('/login');
+      
+      if (response.ok) {
+        // Clear any client-side state if needed
+        router.push('/login');
+      } else {
+        console.error('Logout failed:', await response.text());
+      }
     } catch (error) {
       console.error('Logout failed:', error);
     } finally {
@@ -84,9 +92,14 @@ export default function StudentPortalLayout({
               variant="ghost"
               className="w-full justify-start text-white hover:bg-white/10"
               onClick={handleLogout}
+              disabled={isLoading}
             >
-              <LogOut className="mr-3 h-5 w-5" />
-              Logout
+              {isLoading ? (
+                <Loader2 className="mr-3 h-5 w-5 animate-spin" />
+              ) : (
+                <LogOut className="mr-3 h-5 w-5" />
+              )}
+              {isLoading ? 'Logging out...' : 'Logout'}
             </Button>
           </div>
         </div>
@@ -113,8 +126,4 @@ export default function StudentPortalLayout({
       </div>
     </div>
   );
-}
-
-function setIsLoading(arg0: boolean) {
-  throw new Error('Function not implemented.');
 }
