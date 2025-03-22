@@ -98,7 +98,7 @@ export default function Dashboard() {
                   hour12: true 
                 })}
               </p>
-            </div>
+      </div>
             <div className="flex gap-3">
               <Button 
                 variant="outline" 
@@ -119,8 +119,8 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-      </div>
-
+            </div>
+            
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="p-4 border-l-4 border-amber-600">
@@ -133,17 +133,17 @@ export default function Dashboard() {
               <p className="text-2xl font-bold">{enrollments.length}</p>
             </div>
           </div>
-        </Card>
+                </Card>
         <Card className="p-4 border-l-4 border-amber-600">
           <div className="flex items-center gap-4">
             <div className="p-2 bg-amber-100 rounded-lg">
               <Clock className="h-5 w-5 text-amber-600" />
-            </div>
-            <div>
+                        </div>
+                        <div>
               <p className="text-sm text-gray-600">Hours Completed</p>
               <p className="text-2xl font-bold">24</p>
-            </div>
-          </div>
+                        </div>
+                      </div>
         </Card>
         <Card className="p-4 border-l-4 border-amber-600">
           <div className="flex items-center gap-4">
@@ -154,8 +154,8 @@ export default function Dashboard() {
               <p className="text-sm text-gray-600">Next Class</p>
               <p className="text-2xl font-bold">Today</p>
             </div>
-          </div>
-        </Card>
+                    </div>
+                  </Card>
         <Card className="p-4 border-l-4 border-amber-600">
           <div className="flex items-center gap-4">
             <div className="p-2 bg-amber-100 rounded-lg">

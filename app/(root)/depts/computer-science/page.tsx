@@ -9,10 +9,10 @@ import Link from 'next/link';
 // Define the Course type
 type Course = {
   course_id: number;
-  name: string;
+  title: string;
   description: string;
-  duration: string;
-  level: string;
+  duration_months: string;
+  skill_level: string;
 };
 
 // Map course types to icons
@@ -35,6 +35,7 @@ const ComputerSciencePage = () => {
       try {
         const response = await fetch('/api/getCourses');
         const data = await response.json();
+        console.log('Fetched courses:', data);
         setCourses(data);
       } catch (error) {
         console.error('Error fetching courses:', error);
@@ -45,8 +46,9 @@ const ComputerSciencePage = () => {
   }, []);
 
   // Helper function to get icon component
-  const getIconForCourse = (courseName: string) => {
-    // You can implement your own logic to match course names to icons
+  const getIconForCourse = (courseName: string | undefined) => {
+    if (!courseName) return courseIcons['default'];
+    
     const iconKey = Object.keys(courseIcons).find(key => 
       courseName.toLowerCase().includes(key.toLowerCase())
     ) || 'default';
@@ -120,11 +122,11 @@ const ComputerSciencePage = () => {
         </div>
 
         {/* Courses Section */}
-        <div className="mb-16">
+        {/* <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8">Our Courses</h2>
           <div className="grid grid-cols-1 gap-4">
             {courses.map((course) => {
-              const IconComponent = getIconForCourse(course.name);
+              const IconComponent = getIconForCourse(course?.title);
               return (
                 <Card key={course.course_id} className="overflow-hidden">
                   <button
@@ -137,7 +139,7 @@ const ComputerSciencePage = () => {
                           <IconComponent className="h-6 w-6 text-amber-600" />
                         </div>
                         <div className="text-left">
-                          <h3 className="font-semibold">{course.name}</h3>
+                          <h3 className="font-semibold">{course.title}</h3>
                           <p className="text-sm text-muted-foreground">{course.description}</p>
                         </div>
                       </div>
@@ -154,11 +156,15 @@ const ComputerSciencePage = () => {
                         <div className="grid grid-cols-2 gap-4">
                           <div>
                             <p className="text-sm font-medium">Duration</p>
-                            <p className="text-sm text-muted-foreground">{course.duration}</p>
+                            <p className="text-sm text-muted-foreground">
+                              {course.duration_months} months
+                            </p>
                           </div>
                           <div>
                             <p className="text-sm font-medium">Level</p>
-                            <p className="text-sm text-muted-foreground">{course.level}</p>
+                            <p className="text-sm text-muted-foreground">
+                              {course.skill_level}
+                            </p>
                           </div>
                         </div>
                         <Button className="w-full bg-amber-600 hover:bg-amber-700" asChild>
@@ -171,7 +177,7 @@ const ComputerSciencePage = () => {
               );
             })}
           </div>
-        </div>
+        </div> */}
 
         {/* CTA Section */}
         <Card className="p-8 bg-blue-50 dark:bg-blue-950">

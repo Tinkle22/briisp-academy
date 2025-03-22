@@ -19,6 +19,7 @@ import Image from "next/image";
 
 const navigation = [
   { name: "Home", href: "/" },
+  { name: "Portal", href: "/dashboard" },
   { name: "Apply", href: "#", component: ApplyDropdown },
   { name: "Other Services", href: "#", component: ServicesDropdown },
   {
@@ -200,6 +201,7 @@ export default function Navbar() {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
+                
                 {navigation.map((item) => (
                   <div key={item.name}>
                     {item.dropdown ? (
@@ -238,6 +240,16 @@ export default function Navbar() {
                     )}
                   </div>
                 ))}
+                
+                <div className="mt-4">
+                  <Button
+                    variant="default"
+                    className="w-full"
+                    onClick={() => window.location.href = '/login'}
+                  >
+                    Portal
+                  </Button>
+                </div>
               </div>
               <div className="py-6 space-y-2">
                 <div className="flex items-center justify-between px-3">

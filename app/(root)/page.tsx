@@ -25,12 +25,22 @@ interface DownloadableFile {
 
 export default function Home() {
   const [downloadables, setDownloadables] = useState<DownloadableFile[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchDownloadables = async () => {
-      const response = await fetch('/api/downloadables');
-      const data = await response.json();
-      setDownloadables(data);
+      try {
+        const response = await fetch('/api/downloadables');
+        if (!response.ok) throw new Error('Failed to fetch downloadables');
+        const data = await response.json();
+        // Ensure data is an array before setting state
+        setDownloadables(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error('Error fetching downloadables:', error);
+        setDownloadables([]);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchDownloadables();
@@ -114,20 +124,26 @@ export default function Home() {
               <h2 className="text-xl font-semibold">Downloads</h2>
             </div>
             <div className="space-y-3">
-              {downloadables
-                .filter(file => 
-                  ["Brochure", "Course Catalog", "Fee Structure"].includes(file.file_name)
-                )
-                .map((file, index) => (
-                  <Button
-                    key={index}
-                    variant="outline"
-                    className="w-full justify-between text-left font-normal transition-all duration-300 hover:bg-emerald-50"
-                    onClick={() => window.open(file.file_url, "_blank")}
-                  >
-                    <span>{file.file_name}</span>
-                  </Button>
-                ))}
+              {loading ? (
+                <p className="text-sm text-muted-foreground">Loading downloads...</p>
+              ) : downloadables.length > 0 ? (
+                downloadables
+                  .filter(file => 
+                    ["Academy Brochure", "Course Catalog", "Fee Structure"].includes(file.file_name)
+                  )
+                  .map((file, index) => (
+                    <Button
+                      key={index}
+                      variant="outline"
+                      className="w-full justify-between text-left font-normal transition-all duration-300 hover:bg-emerald-50"
+                      onClick={() => window.open(file.file_url, "_blank")}
+                    >
+                      <span>{file.file_name}</span>
+                    </Button>
+                  ))
+              ) : (
+                <p className="text-sm text-muted-foreground">No downloadable files available</p>
+              )}
             </div>
           </Card>
           {/* Campus Location */}
