@@ -8,7 +8,7 @@ import {
   GraduationCap,
   BookOpen,
   ClipboardList,
-  Calendar,
+  Key,
   Bell,
   Clock,
   LogOut,
@@ -24,6 +24,7 @@ const navigation = [
   { name: 'My Courses', href: '/course', icon: BookOpen },
   { name: 'Result', href: '/result', icon: Clock },
   { name: 'Notice', href: '/notice', icon: Bell },
+  { name: 'Change Password', href: '/account/change-password', icon: Key },
 ];
 
 export default function StudentPortalLayout({
