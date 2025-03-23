@@ -21,7 +21,7 @@ import { useRouter } from 'next/navigation';
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Apply for other ', href: '/registration', icon: ClipboardList },
-  { name: 'Courses', href: '/course', icon: BookOpen },
+  { name: 'My Courses', href: '/course', icon: BookOpen },
   { name: 'Result', href: '/result', icon: Clock },
   { name: 'Notice', href: '/notice', icon: Bell },
 ];
@@ -45,7 +45,7 @@ export default function StudentPortalLayout({
       
       if (response.ok) {
         // Clear any client-side state if needed
-        router.push('/login');
+        router.push('/');
       } else {
         console.error('Logout failed:', await response.text());
       }
