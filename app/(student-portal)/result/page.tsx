@@ -84,7 +84,7 @@ export default function ResultPage() {
   };
 
   const handlePrint = useReactToPrint({
-    contentRef: printRef,
+    content: () => printRef.current,
     documentTitle: 'Academic Results Slip',
     onBeforePrint: () => {
       setIsPrinting(true);

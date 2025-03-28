@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import ContactForm from '@/components/contact-form';
