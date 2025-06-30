@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/hooks/use-toast"
 
@@ -34,6 +35,7 @@ const ApplicationForm = () => {
   
   // Form state
   const [studentType, setStudentType] = useState<'child' | 'adult'>('adult');
+  const [isRefresherCourse, setIsRefresherCourse] = useState(false);
   const [formData, setFormData] = useState({
     studyMode: '',
     firstName: '',
@@ -49,7 +51,13 @@ const ApplicationForm = () => {
     email: '',
     phoneNumber: '',
     country: '',
-    courseId: ''
+    courseId: '',
+    // Refresher-specific fields
+    currentSkillLevel: '',
+    previousExperience: '',
+    learningGoals: '',
+    preferredSchedule: '',
+    mentorshipInterest: ''
   });
 
   // Get program from URL and find matching course
@@ -65,14 +73,16 @@ const ApplicationForm = () => {
         
         // If program code exists in URL, set the corresponding course
         if (programCode) {
-          const matchingCourse = data.find((course: Course) => 
-            course.course_code === programCode
+          const matchingCourse = data.find((course: Course) =>
+            course.course_code === programCode || course.program_type === programCode
           );
           if (matchingCourse) {
             setFormData(prev => ({
               ...prev,
               courseId: matchingCourse.course_id.toString()
             }));
+            // Check if it's a refresher course
+            setIsRefresherCourse(matchingCourse.program_type === 'refresher');
           }
         }
       } catch (error) {
@@ -101,6 +111,12 @@ const ApplicationForm = () => {
       ...prev,
       [id]: value
     }));
+
+    // Check if selected course is a refresher course
+    if (id === 'courseId') {
+      const selectedCourse = courses.find(course => course.course_id.toString() === value);
+      setIsRefresherCourse(selectedCourse?.program_type === 'refresher');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -108,7 +124,10 @@ const ApplicationForm = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/applications', {
+      // Use refresher-specific endpoint if it's a refresher course
+      const endpoint = isRefresherCourse ? '/api/applications/refresher' : '/api/applications';
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -231,6 +250,12 @@ const ApplicationForm = () => {
                         <SelectItem value="distance">Distance Learning</SelectItem>
                         <SelectItem value="partTime">Part Time</SelectItem>
                         <SelectItem value="fullTime">Full Time</SelectItem>
+                        {isRefresherCourse && (
+                          <>
+                            <SelectItem value="evening">Evening Classes</SelectItem>
+                            <SelectItem value="weekend">Weekend Classes</SelectItem>
+                          </>
+                        )}
                       </>
                     )}
                   </SelectContent>
@@ -374,12 +399,95 @@ const ApplicationForm = () => {
                 </div>
               </div>
 
-              <Button 
-                type="submit" 
+              {/* Refresher Course Specific Fields */}
+              {isRefresherCourse && (
+                <div className="space-y-6 border-t pt-6">
+                  <h3 className="text-lg font-semibold text-gray-900">Refresher Course Information</h3>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="currentSkillLevel">Current Skill Level</Label>
+                      <Select
+                        value={formData.currentSkillLevel}
+                        onValueChange={(value) => handleSelectChange('currentSkillLevel', value)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your current level" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="beginner">Beginner</SelectItem>
+                          <SelectItem value="intermediate">Intermediate</SelectItem>
+                          <SelectItem value="advanced">Advanced</SelectItem>
+                          <SelectItem value="expert">Expert (need refresh)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="preferredSchedule">Preferred Schedule</Label>
+                      <Select
+                        value={formData.preferredSchedule}
+                        onValueChange={(value) => handleSelectChange('preferredSchedule', value)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select preferred schedule" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="evening">Evening Classes</SelectItem>
+                          <SelectItem value="weekend">Weekend Classes</SelectItem>
+                          <SelectItem value="flexible">Flexible</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="previousExperience">Previous Experience (Optional)</Label>
+                    <Textarea
+                      id="previousExperience"
+                      placeholder="Briefly describe your previous experience in this field"
+                      value={formData.previousExperience}
+                      onChange={handleInputChange}
+                      rows={3}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="learningGoals">Learning Goals (Optional)</Label>
+                    <Textarea
+                      id="learningGoals"
+                      placeholder="What do you hope to achieve from this refresher course?"
+                      value={formData.learningGoals}
+                      onChange={handleInputChange}
+                      rows={3}
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="mentorshipInterest">Interest in Mentorship</Label>
+                    <Select
+                      value={formData.mentorshipInterest}
+                      onValueChange={(value) => handleSelectChange('mentorshipInterest', value)}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Are you interested in mentorship?" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="yes">Yes, I'm interested</SelectItem>
+                        <SelectItem value="no">No, not at this time</SelectItem>
+                        <SelectItem value="maybe">Maybe, tell me more</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              )}
+
+              <Button
+                type="submit"
                 className="w-full bg-amber-600 hover:bg-amber-700"
                 disabled={loading}
               >
-                {loading ? "Submitting..." : "Submit Application"}
+                {loading ? "Submitting..." : `Submit ${isRefresherCourse ? 'Refresher Course ' : ''}Application`}
               </Button>
             </form>
           </Card>

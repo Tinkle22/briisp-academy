@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Card } from '@/components/ui/card';
-import { ChevronRight, BookOpen, FileCode, Users, Lightbulb, PenTool, GraduationCap } from 'lucide-react';
+import { ChevronRight, BookOpen, FileCode, Users, Lightbulb, PenTool, GraduationCap, Briefcase } from 'lucide-react';
 
 interface ServiceDetails {
   title: string;
@@ -22,8 +22,20 @@ const services = [
       title: 'Graduate Refresher Course',
       description: 'We help you practice and become proficient in your field through hands-on training and expert guidance.',
       image: 'https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=400&q=80',
-      applyLink: '/apply/refresher',
-      viewMoreLink: '/services/refresher'
+      applyLink: '/apply?program=refresher',
+      viewMoreLink: '/refresher'
+    }
+  },
+  {
+    id: 'internships',
+    label: 'Internship Placement',
+    icon: Briefcase,
+    details: {
+      title: 'Internship Placement Program',
+      description: 'Connect with real-world internship opportunities across the tech industry with guided mentorship and certification.',
+      image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=400&q=80',
+      applyLink: '/internships',
+      viewMoreLink: '/internships'
     }
   },
   {

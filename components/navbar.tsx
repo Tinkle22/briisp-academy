@@ -21,6 +21,8 @@ const navigation = [
   { name: "Home", href: "/" },
   { name: "Portal", href: "/dashboard" },
   { name: "Apply", href: "#", component: ApplyDropdown },
+  { name: "Refresher Courses", href: "/refresher" },
+  { name: "Internships", href: "/internships" },
   { name: "Other Services", href: "#", component: ServicesDropdown },
   {
     name: "Admissions",
