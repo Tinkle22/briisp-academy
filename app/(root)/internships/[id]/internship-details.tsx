@@ -92,12 +92,36 @@ const InternshipDetails = ({ internship, similarInternships }: InternshipDetails
   const requirementsList = internship.requirements ? internship.requirements.split('\n').filter(req => req.trim()) : [];
   const responsibilitiesList = internship.responsibilities ? internship.responsibilities.split('\n').filter(resp => resp.trim()) : [];
 
+  // Helper function to get internship image based on industry
+  const getInternshipImage = (industry: string) => {
+    const imageMap: { [key: string]: string } = {
+      "Technology": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
+      "Data Science": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+      "Cybersecurity": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
+      "Cloud Computing": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
+      "Mobile Development": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80",
+      "Design": "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=800&q=80",
+      "Software Development": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+    };
+    return imageMap[industry] || "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80";
+  };
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative py-16 bg-background border-b">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div 
+      {/* Hero Section with Background Image */}
+      <section className="relative py-20 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src={getInternshipImage(internship.industry)}
+            alt={internship.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
+        </div>
+
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div
             className="grid grid-cols-1 lg:grid-cols-3 gap-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -107,24 +131,37 @@ const InternshipDetails = ({ internship, similarInternships }: InternshipDetails
             <div className="lg:col-span-2">
               <div className="flex items-start space-x-4 mb-6">
                 {internship.company_logo && (
-                  <motion.img 
-                    src={internship.company_logo} 
-                    alt={internship.company_name}
-                    className="w-16 h-16 rounded-lg object-cover"
+                  <motion.div
+                    className="w-16 h-16 rounded-lg overflow-hidden bg-white/90 backdrop-blur-sm p-2"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2, duration: 0.5 }}
-                  />
+                  >
+                    <img
+                      src={internship.company_logo}
+                      alt={internship.company_name}
+                      className="w-full h-full object-cover rounded"
+                    />
+                  </motion.div>
                 )}
                 <div className="flex-1">
                   <div className="flex items-center space-x-2 mb-2">
-                    <Badge variant={internship.type === 'paid' ? 'default' : 'secondary'}>
-                      {internship.type === 'paid' ? 'Paid Internship' : 'Unpaid Internship'}
+                    <Badge
+                      variant={internship.type === 'paid' ? 'default' : 'secondary'}
+                      className={`${
+                        internship.type === 'paid'
+                          ? 'bg-green-600 hover:bg-green-700'
+                          : 'bg-blue-600 hover:bg-blue-700'
+                      } text-white border-0`}
+                    >
+                      {internship.type === 'paid' ? '💰 Paid Internship' : '🎓 Experience-Based'}
                     </Badge>
-                    <Badge variant="outline">{internship.industry}</Badge>
+                    <Badge variant="outline" className="bg-white/90 backdrop-blur-sm border-white/20">
+                      {internship.industry}
+                    </Badge>
                   </div>
-                  <h1 className="text-4xl font-bold tracking-tight mb-2">{internship.title}</h1>
-                  <div className="flex items-center space-x-4 text-muted-foreground">
+                  <h1 className="text-4xl font-bold tracking-tight mb-2 text-white">{internship.title}</h1>
+                  <div className="flex items-center space-x-4 text-white/90">
                     <div className="flex items-center">
                       <Building className="h-4 w-4 mr-1" />
                       {internship.company_name}
@@ -136,38 +173,38 @@ const InternshipDetails = ({ internship, similarInternships }: InternshipDetails
                   </div>
                 </div>
               </div>
-              
-              <p className="text-lg text-muted-foreground mb-8">{internship.description}</p>
-              
+
+              <p className="text-lg text-white/90 mb-8">{internship.description}</p>
+
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                <div className="text-center p-4 bg-muted rounded-lg">
-                  <Clock className="h-6 w-6 text-amber-600 mx-auto mb-2" />
-                  <div className="font-semibold">{internship.duration_months} months</div>
-                  <div className="text-sm text-muted-foreground">Duration</div>
+                <div className="text-center p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                  <Clock className="h-6 w-6 text-amber-400 mx-auto mb-2" />
+                  <div className="font-semibold text-white">{internship.duration_months} months</div>
+                  <div className="text-sm text-white/70">Duration</div>
                 </div>
                 {internship.type === 'paid' && internship.stipend_amount && (
-                  <div className="text-center p-4 bg-muted rounded-lg">
-                    <DollarSign className="h-6 w-6 text-amber-600 mx-auto mb-2" />
-                    <div className="font-semibold">K {internship.stipend_amount}</div>
-                    <div className="text-sm text-muted-foreground">Monthly</div>
+                  <div className="text-center p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                    <DollarSign className="h-6 w-6 text-green-400 mx-auto mb-2" />
+                    <div className="font-semibold text-white">K {internship.stipend_amount}</div>
+                    <div className="text-sm text-white/70">Monthly</div>
                   </div>
                 )}
-                <div className="text-center p-4 bg-muted rounded-lg">
-                  <Users className="h-6 w-6 text-amber-600 mx-auto mb-2" />
-                  <div className="font-semibold">{internship.total_applications}</div>
-                  <div className="text-sm text-muted-foreground">Applications</div>
+                <div className="text-center p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                  <Users className="h-6 w-6 text-blue-400 mx-auto mb-2" />
+                  <div className="font-semibold text-white">{internship.total_applications}</div>
+                  <div className="text-sm text-white/70">Applications</div>
                 </div>
-                <div className="text-center p-4 bg-muted rounded-lg">
-                  <Calendar className="h-6 w-6 text-amber-600 mx-auto mb-2" />
-                  <div className="font-semibold">
+                <div className="text-center p-4 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                  <Calendar className="h-6 w-6 text-purple-400 mx-auto mb-2" />
+                  <div className="font-semibold text-white">
                     {new Date(internship.application_deadline).toLocaleDateString()}
                   </div>
-                  <div className="text-sm text-muted-foreground">Deadline</div>
+                  <div className="text-sm text-white/70">Deadline</div>
                 </div>
               </div>
 
               <Link href={`/internships/${internship.internship_id}/apply`}>
-                <Button size="lg" className="bg-amber-600 hover:bg-amber-700">
+                <Button size="lg" className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 shadow-lg">
                   Apply Now
                   <ChevronRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -177,30 +214,30 @@ const InternshipDetails = ({ internship, similarInternships }: InternshipDetails
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Company Info */}
-              <Card>
+              <Card className="bg-white/95 backdrop-blur-sm border-white/20 shadow-xl">
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Building className="h-5 w-5 mr-2" />
+                  <CardTitle className="flex items-center text-gray-900">
+                    <Building className="h-5 w-5 mr-2 text-amber-600" />
                     Company Information
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div>
-                    <span className="font-medium">Industry:</span>
+                    <span className="font-medium text-gray-900">Industry:</span>
                     <p className="text-muted-foreground">{internship.company_industry}</p>
                   </div>
                   <div>
-                    <span className="font-medium">Company Size:</span>
+                    <span className="font-medium text-gray-900">Company Size:</span>
                     <p className="text-muted-foreground">{internship.company_size}</p>
                   </div>
                   {internship.company_website && (
                     <div>
-                      <span className="font-medium">Website:</span>
-                      <a 
-                        href={internship.company_website} 
-                        target="_blank" 
+                      <span className="font-medium text-gray-900">Website:</span>
+                      <a
+                        href={internship.company_website}
+                        target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center text-amber-600 hover:text-amber-700"
+                        className="flex items-center text-amber-600 hover:text-amber-700 mt-1"
                       >
                         <Globe className="h-4 w-4 mr-1" />
                         Visit Website
@@ -210,28 +247,28 @@ const InternshipDetails = ({ internship, similarInternships }: InternshipDetails
                   )}
                   {internship.company_description && (
                     <div>
-                      <span className="font-medium">About:</span>
-                      <p className="text-muted-foreground text-sm">{internship.company_description}</p>
+                      <span className="font-medium text-gray-900">About:</span>
+                      <p className="text-muted-foreground text-sm mt-1">{internship.company_description}</p>
                     </div>
                   )}
                 </CardContent>
               </Card>
 
               {/* Program Benefits */}
-              <Card>
+              <Card className="bg-white/95 backdrop-blur-sm border-white/20 shadow-xl">
                 <CardHeader>
-                  <CardTitle>Program Benefits</CardTitle>
+                  <CardTitle className="text-gray-900">Program Benefits</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {programBenefits.map((benefit, index) => (
-                      <div key={index} className="flex items-start space-x-3">
-                        <div className="p-1 bg-amber-100 rounded">
+                      <div key={index} className="flex items-start space-x-3 p-3 bg-amber-50 rounded-lg">
+                        <div className="p-2 bg-amber-100 rounded-lg">
                           <benefit.icon className="h-4 w-4 text-amber-600" />
                         </div>
                         <div>
-                          <div className="font-medium text-sm">{benefit.title}</div>
-                          <div className="text-xs text-muted-foreground">{benefit.description}</div>
+                          <div className="font-medium text-sm text-gray-900">{benefit.title}</div>
+                          <div className="text-xs text-muted-foreground mt-1">{benefit.description}</div>
                         </div>
                       </div>
                     ))}
