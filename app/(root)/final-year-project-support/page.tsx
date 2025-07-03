@@ -706,7 +706,10 @@ export default function FinalYearProjectSupportPage() {
                 x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
                 y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
               }}
-
+              animate={{
+                y: [0, -100, 0], 
+                opacity: [0, 1, 0],
+              }}
               transition={{
                 duration: Math.random() * 3 + 2,
                 repeat: Infinity,
