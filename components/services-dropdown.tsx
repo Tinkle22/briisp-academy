@@ -9,7 +9,7 @@ interface ServiceDetails {
   title: string;
   description: string;
   image: string;
-  applyLink: string;
+  applyLink?: string;
   viewMoreLink: string;
 }
 
@@ -46,22 +46,11 @@ const services = [
       title: 'Final Year Project Consultation',
       description: 'We give guidance to prototype, abstract, and implement your final year project effectively.',
       image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=400&q=80',
-      applyLink: '/apply/project',
-      viewMoreLink: '/services/project'
+    
+      viewMoreLink: '/final-year-project-support'
     }
   },
-  {
-    id: 'consultations',
-    label: 'Consultations',
-    icon: Users,
-    details: {
-      title: 'Professional Consultations',
-      description: 'Get expert advice and guidance for your technical projects and career decisions.',
-      image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=400&q=80',
-      applyLink: '/apply/consultation',
-      viewMoreLink: '/services/consultation'
-    }
-  },
+
   {
     id: 'internship',
     label: 'Internship',
@@ -70,8 +59,8 @@ const services = [
       title: 'Internship Program',
       description: 'We offer and connect students to different internship opportunities in the industry.',
       image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=400&q=80',
-      applyLink: '/apply/internship',
-      viewMoreLink: '/services/internship'
+     
+      viewMoreLink: '/internship'
     }
   },
   {
@@ -82,7 +71,7 @@ const services = [
       title: 'Innovation Hub',
       description: 'Access cutting-edge technology and resources to bring your innovative ideas to life.',
       image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80',
-      applyLink: '/apply/innovation',
+  
       viewMoreLink: '/services/innovation'
     }
   },
@@ -94,7 +83,7 @@ const services = [
       title: 'Pitch Deck Creation',
       description: 'Learn to create compelling pitch decks and present your ideas professionally.',
       image: 'https://images.unsplash.com/photo-1542626991-cbc4e32524cc?auto=format&fit=crop&w=400&q=80',
-      applyLink: '/apply/pitch',
+    
       viewMoreLink: '/services/pitch'
     }
   }
@@ -182,19 +171,21 @@ export default function ServicesDropdown() {
                     </p>
                     <div className="flex gap-2 md:gap-3">
                       <Link
-                        href={activeService.applyLink}
-                        className="inline-flex items-center justify-center rounded-md text-xs md:text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-emerald-600 text-white hover:bg-amber-700 h-8 md:h-10 px-3 md:px-4 py-1 md:py-2"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        Apply
-                      </Link>
-                      <Link
                         href={activeService.viewMoreLink}
                         className="inline-flex items-center justify-center rounded-md text-xs md:text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 md:h-10 px-3 md:px-4 py-1 md:py-2"
                         onClick={(e) => e.stopPropagation()}
                       >
                         View More
                       </Link>
+                      {activeService.applyLink && (
+                        <Link
+                          href={activeService.applyLink}
+                          className="inline-flex items-center justify-center rounded-md text-xs md:text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-8 md:h-10 px-3 md:px-4 py-1 md:py-2"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Apply Now
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -61,8 +61,8 @@ const ApplicationForm = () => {
     mentorshipInterest: ''
   });
 
-  // Get program from URL and find matching course
-  const programCode = searchParams.get('program');
+  // Get program or course from URL and find matching course
+  const programCode = searchParams.get('program') || searchParams.get('course');
 
   // Fetch courses on component mount
   useEffect(() => {
