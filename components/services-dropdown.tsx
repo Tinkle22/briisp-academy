@@ -34,7 +34,7 @@ const services = [
       title: 'Internship Placement Program',
       description: 'Connect with real-world internship opportunities across the tech industry with guided mentorship and certification.',
       image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=400&q=80',
-      applyLink: '/internships',
+
       viewMoreLink: '/internships'
     }
   },
@@ -51,18 +51,18 @@ const services = [
     }
   },
 
-  {
-    id: 'internship',
-    label: 'Internship',
-    icon: GraduationCap,
-    details: {
-      title: 'Internship Program',
-      description: 'We offer and connect students to different internship opportunities in the industry.',
-      image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=400&q=80',
+  // {
+  //   id: 'internship',
+  //   label: 'Internship',
+  //   icon: GraduationCap,
+  //   details: {
+  //     title: 'Internship Program',
+  //     description: 'We offer and connect students to different internship opportunities in the industry.',
+  //     image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=400&q=80',
      
-      viewMoreLink: '/internship'
-    }
-  },
+  //     viewMoreLink: '/internships'
+  //   }
+  // },
   {
     id: 'innovation',
     label: 'Innovations Technology',
