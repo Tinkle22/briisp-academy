@@ -238,3 +238,228 @@ CREATE TABLE results (
     INDEX idx_enrollment_results (enrollment_id),
     INDEX idx_result_date (result_date)
 ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+
+-- Create companies table for internship providers
+CREATE TABLE companies (
+    company_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    logo_url VARCHAR(255),
+    website VARCHAR(255),
+    location VARCHAR(255),
+    industry VARCHAR(100),
+    size ENUM('startup', 'small', 'medium', 'large', 'enterprise') DEFAULT 'medium',
+    contact_email VARCHAR(255),
+    contact_phone VARCHAR(50),
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_industry (industry),
+    INDEX idx_location (location),
+    INDEX idx_active (is_active)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Create internships table
+CREATE TABLE internships (
+    internship_id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    company_id INT NOT NULL,
+    type ENUM('paid', 'unpaid') NOT NULL,
+    duration_months INT NOT NULL,
+    requirements TEXT,
+    responsibilities TEXT,
+    industry VARCHAR(100) NOT NULL,
+    skills_required TEXT,
+    application_deadline DATE,
+    start_date DATE,
+    stipend_amount DECIMAL(10,2) NULL COMMENT 'Monthly stipend for paid internships',
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (company_id) REFERENCES companies(company_id) ON DELETE CASCADE,
+    INDEX idx_type (type),
+    INDEX idx_industry (industry),
+    INDEX idx_active (is_active),
+    INDEX idx_deadline (application_deadline),
+    INDEX idx_start_date (start_date)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Create internship applications table
+CREATE TABLE internship_applications (
+    application_id INT PRIMARY KEY AUTO_INCREMENT,
+    internship_id INT NULL COMMENT 'NULL for general applications, specific ID for targeted applications',
+    student_name VARCHAR(255) NOT NULL,
+    student_email VARCHAR(255) NOT NULL,
+    student_phone VARCHAR(50) NOT NULL,
+    university VARCHAR(255) NOT NULL,
+    course_of_study VARCHAR(255) NOT NULL,
+    year_of_study VARCHAR(20) NOT NULL,
+    gpa VARCHAR(20),
+    cv_url VARCHAR(500),
+    cover_letter TEXT,
+    portfolio_url VARCHAR(500),
+    linkedin_url VARCHAR(500),
+    github_url VARCHAR(500),
+    availability_start DATE,
+    preferred_duration VARCHAR(50),
+    motivation TEXT,
+    relevant_experience TEXT,
+    technical_skills TEXT,
+    soft_skills TEXT,
+    preferred_industry VARCHAR(100) COMMENT 'For general applications',
+    internship_type_preference ENUM('paid', 'unpaid', 'both') COMMENT 'For general applications',
+    status ENUM('pending', 'reviewed', 'shortlisted', 'accepted', 'rejected') DEFAULT 'pending',
+    application_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    reviewed_by INT,
+    review_date TIMESTAMP NULL,
+    review_notes TEXT,
+    FOREIGN KEY (internship_id) REFERENCES internships(internship_id) ON DELETE CASCADE,
+    INDEX idx_status (status),
+    INDEX idx_application_date (application_date),
+    INDEX idx_student_email (student_email),
+    INDEX idx_internship (internship_id),
+    UNIQUE KEY unique_application (internship_id, student_email) COMMENT 'Prevents duplicate applications'
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Insert sample companies
+INSERT INTO companies (name, description, logo_url, website, location, industry, size, contact_email, contact_phone) VALUES
+('TechZambia Solutions', 'Leading software development company specializing in web and mobile applications for African markets.', 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=100&q=80', 'https://techzambia.com', 'Lusaka, Zambia', 'Technology', 'medium', 'internships@techzambia.com', '+260 211 123456'),
+('DataFlow Analytics', 'Data science and analytics company helping businesses make data-driven decisions.', 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=100&q=80', 'https://dataflow.zm', 'Lusaka, Zambia', 'Data Science', 'small', 'careers@dataflow.zm', '+260 211 234567'),
+('CyberGuard Zambia', 'Cybersecurity firm providing security solutions for enterprises across Southern Africa.', 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=100&q=80', 'https://cyberguard.zm', 'Lusaka, Zambia', 'Cybersecurity', 'medium', 'internships@cyberguard.zm', '+260 211 345678'),
+('CloudTech Africa', 'Cloud computing and DevOps services provider for African businesses.', 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=100&q=80', 'https://cloudtech.africa', 'Lusaka, Zambia', 'Cloud Computing', 'large', 'talent@cloudtech.africa', '+260 211 456789'),
+('MobileFirst Innovations', 'Mobile app development studio creating innovative solutions for various industries.', 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=100&q=80', 'https://mobilefirst.zm', 'Lusaka, Zambia', 'Mobile Development', 'startup', 'join@mobilefirst.zm', '+260 211 567890');
+
+-- Insert sample internships
+INSERT INTO internships (title, description, company_id, type, duration_months, requirements, responsibilities, industry, skills_required, application_deadline, start_date, stipend_amount) VALUES
+('Software Development Intern', 'Join our development team to work on exciting web and mobile applications. You will gain hands-on experience with modern technologies and contribute to real projects.', 1, 'paid', 6, 'Currently enrolled in Computer Science or related field\nBasic knowledge of programming\nStrong problem-solving skills', 'Assist in developing web applications\nWrite clean, maintainable code\nParticipate in code reviews\nCollaborate with senior developers', 'Technology', 'JavaScript, Python, React, Node.js', '2024-02-15', '2024-03-01', 2500.00),
+('Data Science Intern', 'Work with our data science team to analyze large datasets and build predictive models. Perfect opportunity to apply your statistical knowledge in real-world scenarios.', 2, 'paid', 4, 'Statistics or Data Science background\nPython programming experience\nFamiliarity with data analysis libraries', 'Analyze business data\nBuild predictive models\nCreate data visualizations\nPresent findings to stakeholders', 'Data Science', 'Python, R, SQL, Pandas, Scikit-learn, Tableau', '2024-02-20', '2024-03-15', 2000.00),
+('Cybersecurity Intern', 'Learn about cybersecurity practices and help protect our clients from digital threats. Gain experience in penetration testing and security auditing.', 3, 'unpaid', 3, 'Interest in cybersecurity\nBasic networking knowledge\nEthical mindset and attention to detail', 'Assist in security assessments\nMonitor security systems\nDocument security procedures\nSupport incident response', 'Cybersecurity', 'Network Security, Ethical Hacking, Risk Assessment', '2024-02-10', '2024-03-01', NULL),
+('Cloud Engineering Intern', 'Get hands-on experience with cloud platforms and DevOps practices. Work on infrastructure automation and deployment pipelines.', 4, 'paid', 6, 'Basic understanding of cloud concepts\nLinux command line experience\nInterest in automation', 'Deploy applications to cloud\nManage cloud infrastructure\nAutomate deployment processes\nMonitor system performance', 'Cloud Computing', 'AWS, Docker, Kubernetes, Linux, Python', '2024-02-25', '2024-04-01', 3000.00),
+('Mobile App Development Intern', 'Create innovative mobile applications for iOS and Android platforms. Work with cutting-edge technologies and user experience design.', 5, 'paid', 4, 'Mobile development interest\nBasic programming knowledge\nCreative problem-solving skills', 'Develop mobile applications\nImplement user interfaces\nTest app functionality\nCollaborate with design team', 'Mobile Development', 'React Native, Flutter, Swift, Kotlin', '2024-02-12', '2024-03-10', 1800.00),
+('UI/UX Design Intern', 'Design user-friendly interfaces and improve user experience across our digital products. Learn industry-standard design tools and methodologies.', 1, 'unpaid', 3, 'Design portfolio or coursework\nCreativity and attention to detail\nBasic design software knowledge', 'Create user interface designs\nConduct user research\nDevelop wireframes and prototypes\nCollaborate with development team', 'Design', 'Figma, Adobe XD, Sketch, User Research', '2024-02-18', '2024-03-20', NULL);
+
+
+-- Insert sample refresher courses
+INSERT INTO courses (
+  course_code, title, description, duration_months, price, department,
+  category, image_url, program_type, num_lectures, skill_level, languages, class_days
+) VALUES 
+(
+  'REF-DS-001',
+  'Data Science Bootcamp',
+  'Comprehensive refresher course covering modern data science techniques, machine learning algorithms, and practical applications using Python, R, and popular frameworks. Perfect for professionals looking to update their skills in the rapidly evolving field of data science.',
+  6,
+  1200.00,
+  'Computer Science',
+  'adults',
+  'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
+  'refresher',
+  48,
+  'intermediate',
+  'English',
+  'Evenings & Weekends'
+),
+(
+  'REF-CYB-001',
+  'Cybersecurity Fundamentals & Practice',
+  'Hands-on cybersecurity refresher course covering network security, ethical hacking, incident response, and compliance frameworks. Designed for IT professionals seeking to strengthen their security expertise and stay current with emerging threats.',
+  4,
+  950.00,
+  'Computer Science',
+  'adults',
+  'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80',
+  'refresher',
+  32,
+  'intermediate',
+  'English',
+  'Evenings & Weekends'
+),
+(
+  'REF-NET-001',
+  'Networking Essentials (Cisco-based)',
+  'Cisco-certified networking refresher course covering routing, switching, network troubleshooting, and modern network architectures. Ideal for network administrators and engineers looking to update their Cisco skills and prepare for certification.',
+  5,
+  1100.00,
+  'Computer Science',
+  'adults',
+  'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80',
+  'refresher',
+  40,
+  'intermediate',
+  'English',
+  'Evenings & Weekends'
+),
+(
+  'REF-WEB-001',
+  'Web & Mobile App Development (Frontend & Backend)',
+  'Full-stack development refresher covering modern JavaScript frameworks (React, Node.js), mobile development (React Native), and cloud deployment. Perfect for developers wanting to update their skills with current technologies and best practices.',
+  8,
+  1500.00,
+  'Computer Science',
+  'adults',
+  'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80',
+  'refresher',
+  64,
+  'intermediate',
+  'English',
+  'Evenings & Weekends'
+),
+(
+  'REF-ML-001',
+  'Machine Learning & AI for Beginners',
+  'Beginner-friendly machine learning refresher course covering fundamental algorithms, neural networks, and practical AI applications. Designed for professionals new to ML/AI or those seeking to refresh their understanding of core concepts.',
+  6,
+  1300.00,
+  'Computer Science',
+  'adults',
+  'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80',
+  'refresher',
+  48,
+  'beginner',
+  'English',
+  'Evenings & Weekends'
+),
+(
+  'REF-CLOUD-001',
+  'Cloud Computing & DevOps Intro',
+  'Introduction to cloud computing and DevOps practices covering AWS/Azure, containerization (Docker), CI/CD pipelines, and infrastructure as code. Perfect for IT professionals transitioning to cloud-based environments.',
+  5,
+  1150.00,
+  'Computer Science',
+  'adults',
+  'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80',
+  'refresher',
+  40,
+  'beginner',
+  'English',
+  'Evenings & Weekends'
+);
+
+-- Insert sample curriculum for Data Science Bootcamp
+INSERT INTO curriculum (course_id, week_number, topic, content, learning_objectives) VALUES
+((SELECT course_id FROM courses WHERE course_code = 'REF-DS-001'), 1, 'Python for Data Science Refresher', 'Review of Python fundamentals, NumPy, Pandas, and data manipulation techniques', 'Refresh Python skills and master data manipulation libraries'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-DS-001'), 2, 'Data Visualization & Exploratory Analysis', 'Matplotlib, Seaborn, and Plotly for creating compelling visualizations', 'Create professional data visualizations and perform exploratory data analysis'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-DS-001'), 3, 'Statistical Analysis & Hypothesis Testing', 'Statistical concepts, hypothesis testing, and A/B testing methodologies', 'Apply statistical methods to real-world data problems'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-DS-001'), 4, 'Machine Learning Fundamentals', 'Supervised and unsupervised learning algorithms using Scikit-learn', 'Implement and evaluate machine learning models'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-DS-001'), 5, 'Advanced ML & Model Deployment', 'Deep learning basics, model optimization, and deployment strategies', 'Deploy machine learning models to production environments'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-DS-001'), 6, 'Capstone Project', 'End-to-end data science project from data collection to model deployment', 'Complete a comprehensive data science project portfolio piece');
+
+-- Insert sample curriculum for Cybersecurity course
+INSERT INTO curriculum (course_id, week_number, topic, content, learning_objectives) VALUES
+((SELECT course_id FROM courses WHERE course_code = 'REF-CYB-001'), 1, 'Security Fundamentals Review', 'CIA triad, threat landscape, and security frameworks overview', 'Understand core security principles and current threat environment'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-CYB-001'), 2, 'Network Security & Firewalls', 'Network security protocols, firewall configuration, and intrusion detection', 'Configure and manage network security infrastructure'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-CYB-001'), 3, 'Ethical Hacking & Penetration Testing', 'Hands-on penetration testing tools and methodologies', 'Perform ethical hacking assessments and vulnerability testing'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-CYB-001'), 4, 'Incident Response & Forensics', 'Incident response procedures, digital forensics, and recovery strategies', 'Develop incident response plans and conduct forensic analysis');
+
+-- Insert sample curriculum for Web Development course
+INSERT INTO curriculum (course_id, week_number, topic, content, learning_objectives) VALUES
+((SELECT course_id FROM courses WHERE course_code = 'REF-WEB-001'), 1, 'Modern JavaScript & ES6+', 'Latest JavaScript features, async/await, and modern development practices', 'Master modern JavaScript development techniques'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-WEB-001'), 2, 'React.js Fundamentals', 'Component-based architecture, hooks, and state management', 'Build dynamic user interfaces with React'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-WEB-001'), 3, 'Node.js & Express Backend', 'Server-side development, RESTful APIs, and database integration', 'Develop robust backend applications'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-WEB-001'), 4, 'Database Design & Integration', 'SQL and NoSQL databases, ORM/ODM, and data modeling', 'Design and implement efficient database solutions'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-WEB-001'), 5, 'React Native Mobile Development', 'Cross-platform mobile app development with React Native', 'Create mobile applications for iOS and Android'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-WEB-001'), 6, 'Testing & Quality Assurance', 'Unit testing, integration testing, and code quality tools', 'Implement comprehensive testing strategies'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-WEB-001'), 7, 'Deployment & DevOps', 'CI/CD pipelines, containerization, and cloud deployment', 'Deploy applications to production environments'),
+((SELECT course_id FROM courses WHERE course_code = 'REF-WEB-001'), 8, 'Full-Stack Project', 'Complete full-stack application with modern best practices', 'Build and deploy a professional full-stack application');
