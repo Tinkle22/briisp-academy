@@ -22,7 +22,7 @@ const navigation = [
   
   { name: "Apply", href: "#", component: ApplyDropdown },
   { name: "Other Services", href: "#", component: ServicesDropdown },
-  { name: "Portal", href: "/dashboard" },
+
   {
     name: "Admissions",
     href: "#",
