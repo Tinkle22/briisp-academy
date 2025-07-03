@@ -132,27 +132,39 @@ const AnimatedCounter = ({ value, duration = 2 }: { value: string; duration?: nu
 
 // Floating Particles Component
 const FloatingParticles = () => {
+  const getRandomPosition = () => {
+    if (typeof window !== 'undefined') {
+      return {
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+      };
+    }
+    return {
+      x: Math.random() * 1200,
+      y: Math.random() * 800,
+    };
+  };
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-2 h-2 bg-amber-400/20 rounded-full"
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-          }}
-          animate={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-          }}
-          transition={{
-            duration: Math.random() * 10 + 10,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-      ))}
+      {[...Array(6)].map((_, i) => {
+        const initialPos = getRandomPosition();
+        const animatePos = getRandomPosition();
+
+        return (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-amber-400/20 rounded-full"
+            initial={initialPos}
+            animate={animatePos}
+            transition={{
+              duration: Math.random() * 10 + 10,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+        );
+      })}
     </div>
   );
 };
@@ -698,25 +710,41 @@ export default function FinalYearProjectSupportPage() {
         {/* Animated Background */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-900/20 via-transparent to-transparent" />
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-amber-400/30 rounded-full"
-              initial={{
-                x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
-                y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-              }}
-              animate={{
-                y: [0, -100, 0], 
-                opacity: [0, 1, 0],
-              }}
-              transition={{
-                duration: Math.random() * 3 + 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
+          {[...Array(20)].map((_, i) => {
+            const getRandomX = () => {
+              if (typeof window !== 'undefined') {
+                return Math.random() * window.innerWidth;
+              }
+              return Math.random() * 1200;
+            };
+
+            const getRandomY = () => {
+              if (typeof window !== 'undefined') {
+                return Math.random() * window.innerHeight;
+              }
+              return Math.random() * 800;
+            };
+
+            return (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 bg-amber-400/30 rounded-full"
+                initial={{
+                  x: getRandomX(),
+                  y: getRandomY(),
+                }}
+                animate={{
+                  y: [0, -100, 0],
+                  opacity: [0, 1, 0],
+                }}
+                transition={{
+                  duration: Math.random() * 3 + 2,
+                  repeat: Infinity,
+                  delay: Math.random() * 2,
+                }}
+              />
+            );
+          })}
         </div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
