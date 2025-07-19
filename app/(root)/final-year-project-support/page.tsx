@@ -463,7 +463,7 @@ export default function FinalYearProjectSupportPage() {
                     className="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 hover:from-amber-700 hover:via-orange-700 hover:to-red-700 text-white px-10 py-6 rounded-2xl shadow-2xl hover:shadow-amber-500/25 transition-all duration-500 group text-lg font-semibold"
                     asChild
                   >
-                    <Link href="/apply?course=final-year-project-support">
+                    <Link href="/apply/final-year-project">
                       <GraduationCap className="mr-3 h-6 w-6" />
                       Start Your Journey
                       <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform duration-300" />
@@ -1106,7 +1106,7 @@ export default function FinalYearProjectSupportPage() {
                   className="bg-white text-amber-600 hover:bg-gray-50 px-12 py-6 rounded-2xl text-xl font-bold shadow-2xl hover:shadow-white/25 transition-all duration-500 group"
                   asChild
                 >
-                  <Link href="/apply?course=final-year-project-support">
+                  <Link href="/apply/final-year-project">
                     <GraduationCap className="mr-4 h-7 w-7" />
                     Start Your Success Story
                     <ArrowRight className="ml-4 h-7 w-7 group-hover:translate-x-2 transition-transform duration-300" />

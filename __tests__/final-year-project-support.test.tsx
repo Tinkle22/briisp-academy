@@ -87,8 +87,8 @@ describe('Final Year Project Support Page', () => {
     
     // Check that the buttons link to the correct URL
     const links = screen.getAllByRole('link');
-    const applyLinks = links.filter(link => 
-      link.getAttribute('href') === '/apply?course=final-year-project-support'
+    const applyLinks = links.filter(link =>
+      link.getAttribute('href') === '/apply/final-year-project'
     );
     expect(applyLinks).toHaveLength(2);
   });

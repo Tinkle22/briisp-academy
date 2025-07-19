@@ -1,9 +1,19 @@
-'use client';
+/* eslint-disable @next/next/no-img-element */
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Card } from '@/components/ui/card';
-import { ChevronRight, BookOpen, FileCode, Users, Lightbulb, PenTool, GraduationCap, Briefcase } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { Card } from "@/components/ui/card";
+import {
+  ChevronRight,
+  BookOpen,
+  FileCode,
+  Users,
+  Lightbulb,
+  PenTool,
+  GraduationCap,
+  Briefcase,
+} from "lucide-react";
 
 interface ServiceDetails {
   title: string;
@@ -15,40 +25,46 @@ interface ServiceDetails {
 
 const services = [
   {
-    id: 'refresher',
-    label: 'Refresher Course',
+    id: "refresher",
+    label: "Refresher Course",
     icon: BookOpen,
     details: {
-      title: 'Graduate Refresher Course',
-      description: 'We help you practice and become proficient in your field through hands-on training and expert guidance.',
-      image: 'https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=400&q=80',
-      applyLink: '/apply?program=refresher',
-      viewMoreLink: '/refresher'
-    }
+      title: "Graduate Refresher Course",
+      description:
+        "We help you practice and become proficient in your field through hands-on training and expert guidance.",
+      image:
+        "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=400&q=80",
+
+      viewMoreLink: "/refresher",
+    },
   },
   {
-    id: 'internships',
-    label: 'Internship Placement',
+    id: "internships",
+    label: "Internship Placement",
     icon: Briefcase,
     details: {
-      title: 'Internship Placement Program',
-      description: 'Connect with real-world internship opportunities across the tech industry with guided mentorship and certification.',
-      image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=400&q=80',
+      title: "Internship Placement Program",
+      description:
+        "Connect with real-world internship opportunities across the tech industry with guided mentorship and certification.",
+      image:
+        "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=400&q=80",
 
-      viewMoreLink: '/internships'
-    }
+      viewMoreLink: "/internships",
+    },
   },
   {
-    id: 'final-year',
-    label: 'Final Year Project',
+    id: "final-year",
+    label: "Final Year Project",
     icon: FileCode,
     details: {
-      title: 'Final Year Project Consultation',
-      description: 'We give guidance to prototype, abstract, and implement your final year project effectively.',
-      image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=400&q=80',
-    
-      viewMoreLink: '/final-year-project-support'
-    }
+      title: "Final Year Project Consultation",
+      description:
+        "We give guidance to prototype, abstract, and implement your final year project effectively.",
+      image:
+        "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=400&q=80",
+
+      viewMoreLink: "/final-year-project-support",
+    },
   },
 
   // {
@@ -59,44 +75,50 @@ const services = [
   //     title: 'Internship Program',
   //     description: 'We offer and connect students to different internship opportunities in the industry.',
   //     image: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=400&q=80',
-     
+
   //     viewMoreLink: '/internships'
   //   }
   // },
   {
-    id: 'innovation',
-    label: 'Innovations Technology',
+    id: "innovation",
+    label: "Innovations Technology",
     icon: Lightbulb,
     details: {
-      title: 'Innovation Hub',
-      description: 'Access cutting-edge technology and resources to bring your innovative ideas to life.',
-      image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80',
-  
-      viewMoreLink: '/services/innovation'
-    }
+      title: "Innovation Hub",
+      description:
+        "Access cutting-edge technology and resources to bring your innovative ideas to life.",
+      image:
+        "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80",
+
+      viewMoreLink: "/services/innovation",
+    },
   },
   {
-    id: 'pitch',
-    label: 'Pitch Decks',
+    id: "pitch",
+    label: "Pitch Decks",
     icon: PenTool,
     details: {
-      title: 'Pitch Deck Creation',
-      description: 'Learn to create compelling pitch decks and present your ideas professionally.',
-      image: 'https://images.unsplash.com/photo-1542626991-cbc4e32524cc?auto=format&fit=crop&w=400&q=80',
-    
-      viewMoreLink: '/services/pitch'
-    }
-  }
+      title: "Pitch Deck Creation",
+      description:
+        "Learn to create compelling pitch decks and present your ideas professionally.",
+      image:
+        "https://images.unsplash.com/photo-1542626991-cbc4e32524cc?auto=format&fit=crop&w=400&q=80",
+
+      viewMoreLink: "/pitch",
+    },
+  },
 ];
 
 export default function ServicesDropdown() {
-  const [activeService, setActiveService] = useState<ServiceDetails | null>(null);
+  const [activeService, setActiveService] = useState<ServiceDetails | null>(
+    null
+  );
   const [isOpen, setIsOpen] = useState(false);
 
   // Close dropdown when clicking outside
   const handleClickOutside = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
-    if (!target.closest('.services-dropdown')) {
+    if (!target.closest(".services-dropdown")) {
       setIsOpen(false);
       setActiveService(null);
     }
@@ -105,11 +127,11 @@ export default function ServicesDropdown() {
   // Add/remove event listener
   useEffect(() => {
     if (isOpen) {
-      document.addEventListener('click', handleClickOutside);
+      document.addEventListener("click", handleClickOutside);
     }
     return () => {
-      document.removeEventListener('click', handleClickOutside);
-    }
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, [isOpen]);
 
   return (
@@ -137,7 +159,9 @@ export default function ServicesDropdown() {
                   <button
                     key={service.id}
                     className={`flex items-center gap-2 w-full p-2 md:p-3 text-sm rounded-md hover:bg-muted text-left ${
-                      activeService?.title === service.details.title ? 'bg-muted' : ''
+                      activeService?.title === service.details.title
+                        ? "bg-muted"
+                        : ""
                     }`}
                     onMouseEnter={() => setActiveService(service.details)}
                     onClick={(e) => {
@@ -165,7 +189,9 @@ export default function ServicesDropdown() {
                     />
                   </div>
                   <div>
-                    <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2">{activeService.title}</h3>
+                    <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2">
+                      {activeService.title}
+                    </h3>
                     <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4">
                       {activeService.description}
                     </p>
@@ -191,7 +217,9 @@ export default function ServicesDropdown() {
                 </div>
               ) : (
                 <div className="h-32 md:h-full flex items-center justify-center text-muted-foreground">
-                  <p className="text-xs md:text-sm">Select a service to see details</p>
+                  <p className="text-xs md:text-sm">
+                    Select a service to see details
+                  </p>
                 </div>
               )}
             </div>
