@@ -1,0 +1,80 @@
+-- Innovation Lab Applications Database Setup
+-- Run this SQL script to create the innovation_lab_applications table
+
+CREATE TABLE innovation_lab_applications (
+  application_id INT PRIMARY KEY AUTO_INCREMENT,
+  applicant_name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  phone VARCHAR(50) NOT NULL,
+  university_organization VARCHAR(255) NOT NULL,
+  project_title VARCHAR(255) NOT NULL,
+  idea_description TEXT NOT NULL,
+  innovation_type ENUM('software', 'hardware', 'ai-ml', 'biotech', 'fintech', 'edtech', 'cleantech', 'other') NOT NULL,
+  development_stage ENUM('idea', 'research', 'prototype', 'testing', 'refinement') NOT NULL,
+  problem_statement TEXT,
+  solution_approach TEXT,
+  target_market TEXT,
+  software_needs TEXT,
+  hardware_needs TEXT,
+  technologies_involved TEXT,
+  technical_expertise_required TEXT,
+  project_duration ENUM('1-3-months', '3-6-months', '6-12-months', '12-months-plus'),
+  expected_outcomes TEXT,
+  success_metrics TEXT,
+  project_deadline DATE,
+  team_size INT,
+  team_member_roles TEXT,
+  team_experience TEXT,
+  previous_projects TEXT,
+  lab_access_needs TEXT,
+  equipment_requirements TEXT,
+  funding_requirements TEXT,
+  mentorship_needs TEXT,
+  collaboration_interests BOOLEAN DEFAULT false,
+  additional_notes TEXT,
+  status ENUM('pending', 'reviewed', 'accepted', 'rejected', 'in-progress', 'completed') DEFAULT 'pending',
+  application_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  reviewed_by INT,
+  review_date TIMESTAMP NULL,
+  review_notes TEXT,
+  assigned_mentor VARCHAR(255),
+  lab_access_granted BOOLEAN DEFAULT false,
+  project_start_date DATE,
+  project_completion_date DATE,
+  final_presentation_date DATE,
+  project_outcomes TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  
+  -- Indexes for better performance
+  INDEX idx_status (status),
+  INDEX idx_application_date (application_date),
+  INDEX idx_email (email),
+  INDEX idx_innovation_type (innovation_type),
+  INDEX idx_development_stage (development_stage)
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Sample data for testing (optional)
+INSERT INTO innovation_lab_applications (
+  applicant_name, email, phone, university_organization, project_title,
+  idea_description, innovation_type, development_stage, problem_statement,
+  solution_approach, target_market, technologies_involved, project_duration,
+  expected_outcomes, team_size, collaboration_interests
+) VALUES (
+  'Dr. Sarah Chen',
+  'sarah.chen@university.edu',
+  '+260771234567',
+  'University of Zambia - Computer Science Department',
+  'AI-Powered Agricultural Monitoring System',
+  'An innovative IoT and AI-based system that monitors crop health, soil conditions, and weather patterns to optimize agricultural productivity.',
+  'ai-ml',
+  'prototype',
+  'Zambian farmers face significant challenges in crop monitoring and disease detection, leading to reduced yields and food security issues.',
+  'Deploy IoT sensors across farmland, use drone-mounted cameras for aerial monitoring, and implement AI algorithms for data analysis.',
+  'Small to medium-scale farmers in Zambia and Southern Africa, agricultural cooperatives, and government agricultural departments.',
+  'Python, TensorFlow, OpenCV, IoT sensors, Raspberry Pi, drone technology, React Native',
+  '6-12-months',
+  'Working prototype system deployed on test farms, mobile application for farmers, AI models with 90%+ accuracy in disease detection.',
+  6,
+  true
+);
