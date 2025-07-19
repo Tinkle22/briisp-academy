@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
+import { getFileUrl } from '@/lib/file-config';
 
 export async function GET() {
   try {
@@ -17,7 +18,16 @@ export async function GET() {
       ORDER BY c.created_at DESC
     `);
 
-    return NextResponse.json(courses);
+    // Process image URLs to use dashboard file access
+    const processedCourses = (courses as any[]).map(course => ({
+      ...course,
+      image_url: course.image_url ? getFileUrl(course.image_url) : null,
+      gallery_images: course.gallery_images ?
+        course.gallery_images.split(',').map((url: string) => getFileUrl(url.trim())).join(',') :
+        null
+    }));
+
+    return NextResponse.json(processedCourses);
   } catch (error) {
     console.error('Error fetching refresher courses:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

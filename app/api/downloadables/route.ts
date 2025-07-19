@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
+import { getFileUrl } from '@/lib/file-config';
 
 // GET all downloadable files
 export async function GET() {
@@ -10,7 +11,13 @@ export async function GET() {
       LEFT JOIN courses c ON f.course_id = c.course_id
       ORDER BY f.upload_date DESC
     `);
-    return NextResponse.json(rows);
+    // Process file URLs to use dashboard file access
+    const processedFiles = (rows as any[]).map(file => ({
+      ...file,
+      file_url: file.file_url ? getFileUrl(file.file_url) : null
+    }));
+
+    return NextResponse.json(processedFiles);
   } catch (error) {
     console.error('Error fetching files:', error);
     return NextResponse.json({ error: 'Failed to fetch files' }, { status: 500 });

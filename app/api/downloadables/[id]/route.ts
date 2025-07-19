@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import pool from '@/lib/db';
+import { getFileUrl } from '@/lib/file-config';
 
 // GET specific file by ID
 export async function GET(
@@ -20,7 +21,13 @@ export async function GET(
       return NextResponse.json({ error: 'File not found' }, { status: 404 });
     }
     
-    return NextResponse.json(file);
+    // Process file URL to use dashboard file access
+    const processedFile = {
+      ...file,
+      file_url: file.file_url ? getFileUrl(file.file_url) : null
+    };
+
+    return NextResponse.json(processedFile);
   } catch (error) {
     console.error('Error fetching file:', error);
     return NextResponse.json({ error: 'Failed to fetch file' }, { status: 500 });

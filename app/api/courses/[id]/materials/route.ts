@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
+import { getFileUrl } from '@/lib/file-config';
 
 export async function GET(
   request: Request,
@@ -22,7 +23,13 @@ export async function GET(
       [params.id]
     );
     
-    return NextResponse.json(materials);
+    // Process file URLs to use dashboard file access
+    const processedMaterials = (materials as any[]).map(material => ({
+      ...material,
+      file_url: material.file_url ? getFileUrl(material.file_url) : null
+    }));
+
+    return NextResponse.json(processedMaterials);
   } catch (error) {
     console.error('Error fetching course materials:', error);
     return NextResponse.json({ error: 'Failed to fetch course materials' }, { status: 500 });

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
+import { getFileUrl } from '@/lib/file-config';
 
 interface Gallery {
   gallery_id: string;
@@ -27,7 +28,14 @@ export async function GET(
             );
         }
 
-        return NextResponse.json((gallery as any[])[0]);
+        // Process image URL to use dashboard file access
+        const galleryItem = (gallery as any[])[0];
+        const processedGallery = {
+            ...galleryItem,
+            image_url: galleryItem.image_url ? getFileUrl(galleryItem.image_url) : null
+        };
+
+        return NextResponse.json(processedGallery);
     } catch (error) {
         console.error(error);
         return NextResponse.json(

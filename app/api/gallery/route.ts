@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { Gallery } from '@/lib/types';
+import { getFileUrl } from '@/lib/file-config';
 
 export async function GET(request: Request) {
     try {
@@ -19,7 +20,14 @@ export async function GET(request: Request) {
         query += ' ORDER BY display_order ASC';
 
         const [galleries] = await pool.query(query, params);
-        return NextResponse.json(galleries);
+
+        // Process image URLs to use dashboard file access
+        const processedGalleries = (galleries as any[]).map(gallery => ({
+            ...gallery,
+            image_url: gallery.image_url ? getFileUrl(gallery.image_url) : null
+        }));
+
+        return NextResponse.json(processedGalleries);
     } catch (error) {
         console.error(error);
         return NextResponse.json(

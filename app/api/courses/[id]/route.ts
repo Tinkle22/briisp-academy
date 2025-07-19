@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
+import { getFileUrl } from '@/lib/file-config';
 
 export async function DELETE(
   request: Request,
@@ -21,12 +22,18 @@ export async function GET(
   try {
     const [courses] = await pool.query('SELECT * FROM courses WHERE course_id = ?', [params.id]);
     const course = (courses as any[])[0];
-    
+
     if (!course) {
       return NextResponse.json({ error: 'Course not found' }, { status: 404 });
     }
 
-    return NextResponse.json(course);
+    // Process image URL to use dashboard file access
+    const processedCourse = {
+      ...course,
+      image_url: course.image_url ? getFileUrl(course.image_url) : null
+    };
+
+    return NextResponse.json(processedCourse);
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

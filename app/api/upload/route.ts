@@ -1,11 +1,12 @@
-import { NextResponse } from 'next/server';
-import { imagekit } from '@/lib/imagekit';
+import { NextRequest, NextResponse } from 'next/server';
+import { fileAccessManager } from '@/lib/file-config';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
         const data = await request.formData();
-        const file: File | null = data.get('file') as unknown as File;
-        
+        const file = data.get('file') as File;
+        const folder = (data.get('folder') as string) || 'course-gallery';
+
         if (!file) {
             return NextResponse.json(
                 { error: 'No file uploaded' },
@@ -13,26 +14,22 @@ export async function POST(request: Request) {
             );
         }
 
-        // Convert file to buffer
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-
-        // Upload to ImageKit
-        const result = await imagekit.upload({
-            file: buffer,
-            fileName: file.name,
-            folder: '/course-gallery'  // Customize folder path as needed
-        });
+        // Upload to dashboard
+        const result = await fileAccessManager.uploadFile(file, folder);
 
         return NextResponse.json({
             url: result.url,
-            fileId: result.fileId,
-            thumbnailUrl: result.thumbnailUrl
+            fileId: result.filename,
+            thumbnailUrl: result.url,
+            filename: result.filename,
+            originalName: result.originalName,
+            size: result.size,
+            mimeType: result.mimeType
         });
     } catch (error) {
         console.error('Upload error:', error);
         return NextResponse.json(
-            { error: 'Error uploading file' },
+            { error: error instanceof Error ? error.message : 'Error uploading file' },
             { status: 500 }
         );
     }
