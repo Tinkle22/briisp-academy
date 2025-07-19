@@ -11,7 +11,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/hooks/use-toast"
 import {
   GraduationCap,
-  PresentationChart,
+  Presentation,
   Lightbulb,
   Briefcase,
   ArrowRight,
@@ -206,7 +206,7 @@ const ApplicationForm = () => {
                   onClick={() => router.push('/apply/pitch-deck')}>
               <div className="flex flex-col items-center text-center">
                 <div className="p-4 bg-blue-100 rounded-full mb-4 group-hover:bg-blue-200 transition-colors">
-                  <PresentationChart className="h-8 w-8 text-blue-600" />
+                  <Presentation className="h-8 w-8 text-blue-600" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Pitch Deck Service</h3>
                 <p className="text-sm text-gray-600 mb-4">

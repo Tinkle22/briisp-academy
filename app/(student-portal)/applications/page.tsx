@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -8,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   FileText,
   GraduationCap,
-  PresentationChart,
+  Presentation,
   Lightbulb,
   Briefcase,
   Calendar,
@@ -100,7 +101,7 @@ export default function ApplicationsPage() {
     const icons = {
       course: FileText,
       fyp: GraduationCap,
-      'pitch-deck': PresentationChart,
+      'pitch-deck': Presentation,
       'innovation-lab': Lightbulb,
       internship: Briefcase,
     };
@@ -278,7 +279,7 @@ function ApplicationsList({ applications }: { applications: ApplicationSummary[]
     const icons = {
       course: FileText,
       fyp: GraduationCap,
-      'pitch-deck': PresentationChart,
+      'pitch-deck': Presentation,
       'innovation-lab': Lightbulb,
       internship: Briefcase,
     };
