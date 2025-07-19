@@ -14,17 +14,29 @@ import {
   LogOut,
   Menu,
   Loader2,
+  FileText,
+  Lightbulb,
+  Briefcase,
+  Presentation,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { name: 'Apply for other ', href: '/registration', icon: ClipboardList },
+  { name: 'My Applications', href: '/applications', icon: FileText },
+  { name: 'Apply for Courses', href: '/registration', icon: ClipboardList },
   { name: 'My Courses', href: '/course', icon: BookOpen },
   { name: 'Result', href: '/result', icon: Clock },
   { name: 'Notice', href: '/notice', icon: Bell },
   { name: 'Change Password', href: '/account/change-password', icon: Key },
+];
+
+const applicationLinks = [
+  { name: 'Final Year Project', href: '/apply/final-year-project', icon: GraduationCap },
+  { name: 'Pitch Deck Service', href: '/apply/pitch-deck', icon: Presentation },
+  { name: 'Innovation Lab', href: '/apply/innovation-lab', icon: Lightbulb },
+  { name: 'Internship Program', href: '/apply/internship', icon: Briefcase },
 ];
 
 export default function StudentPortalLayout({
@@ -85,6 +97,23 @@ export default function StudentPortalLayout({
                 {item.name}
               </Link>
             ))}
+
+            {/* Application Services Section */}
+            <div className="pt-4 mt-4 border-t border-white/20">
+              <p className="px-3 text-xs font-semibold text-white/60 uppercase tracking-wider mb-2">
+                Apply for Services
+              </p>
+              {applicationLinks.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="group flex items-center rounded-lg px-3 py-2 text-sm font-medium text-white hover:bg-white/10"
+                >
+                  <item.icon className="mr-3 h-4 w-4" />
+                  {item.name}
+                </Link>
+              ))}
+            </div>
           </nav>
 
           {/* Logout */}

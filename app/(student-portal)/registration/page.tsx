@@ -9,6 +9,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Toaster } from "@/components/ui/toaster"
 import { useToast } from "@/hooks/use-toast"
+import {
+  GraduationCap,
+  PresentationChart,
+  Lightbulb,
+  Briefcase,
+  ArrowRight,
+  ExternalLink,
+} from 'lucide-react';
 
 import {
   Select,
@@ -153,18 +161,114 @@ const ApplicationForm = () => {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Application Form
+              Applications & Services
             </h1>
             <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              Fill out the form below to begin your educational journey with us.
+              Apply for courses or explore our specialized services to advance your career and projects.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Application Form */}
+      {/* Specialized Services Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tight">
+              Specialized Services
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Apply for our professional services to support your academic and entrepreneurial journey.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {/* Final Year Project Support */}
+            <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer group"
+                  onClick={() => router.push('/apply/final-year-project')}>
+              <div className="flex flex-col items-center text-center">
+                <div className="p-4 bg-amber-100 rounded-full mb-4 group-hover:bg-amber-200 transition-colors">
+                  <GraduationCap className="h-8 w-8 text-amber-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Final Year Project</h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  Get expert guidance and support for your final year project from proposal to completion.
+                </p>
+                <Button variant="outline" className="w-full group-hover:bg-amber-50">
+                  Apply Now
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </Card>
+
+            {/* Pitch Deck Service */}
+            <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer group"
+                  onClick={() => router.push('/apply/pitch-deck')}>
+              <div className="flex flex-col items-center text-center">
+                <div className="p-4 bg-blue-100 rounded-full mb-4 group-hover:bg-blue-200 transition-colors">
+                  <PresentationChart className="h-8 w-8 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Pitch Deck Service</h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  Professional pitch deck creation and consultation for your startup or business idea.
+                </p>
+                <Button variant="outline" className="w-full group-hover:bg-blue-50">
+                  Apply Now
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </Card>
+
+            {/* Innovation Lab */}
+            <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer group"
+                  onClick={() => router.push('/apply/innovation-lab')}>
+              <div className="flex flex-col items-center text-center">
+                <div className="p-4 bg-green-100 rounded-full mb-4 group-hover:bg-green-200 transition-colors">
+                  <Lightbulb className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Innovation Lab</h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  Join our innovation lab to develop cutting-edge solutions and collaborate with experts.
+                </p>
+                <Button variant="outline" className="w-full group-hover:bg-green-50">
+                  Apply Now
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </Card>
+
+            {/* Internship Program */}
+            <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer group"
+                  onClick={() => router.push('/apply/internship')}>
+              <div className="flex flex-col items-center text-center">
+                <div className="p-4 bg-purple-100 rounded-full mb-4 group-hover:bg-purple-200 transition-colors">
+                  <Briefcase className="h-8 w-8 text-purple-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Internship Program</h3>
+                <p className="text-sm text-gray-600 mb-4">
+                  Apply for internship opportunities with our partner companies and organizations.
+                </p>
+                <Button variant="outline" className="w-full group-hover:bg-purple-50">
+                  Apply Now
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Course Application Form */}
       <section className="py-16">
         <div className="mx-auto max-w-3xl px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold tracking-tight">
+              Course Application
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Apply for our educational courses and programs.
+            </p>
+          </div>
           <Card className="p-6 sm:p-8">
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Student Type Selection */}
