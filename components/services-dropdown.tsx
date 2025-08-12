@@ -90,7 +90,7 @@ const services = [
       image:
         "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80",
 
-      viewMoreLink: "/services/innovation",
+      viewMoreLink: "/innovation-lab",
     },
   },
   {
