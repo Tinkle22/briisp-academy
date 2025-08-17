@@ -155,7 +155,7 @@ const InternshipPlacementProgram = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950 dark:via-indigo-950 dark:to-purple-950 overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
@@ -171,13 +171,13 @@ const InternshipPlacementProgram = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
-                <div className="p-3 bg-amber-100 rounded-full mr-4">
-                  <Briefcase className="h-8 w-8 text-amber-600" />
+                <div className="p-3 bg-amber-100 dark:bg-amber-900/50 rounded-full mr-4">
+                  <Briefcase className="h-8 w-8 text-amber-600 dark:text-amber-400" />
                 </div>
-                <span className="text-amber-600 font-semibold text-lg">Professional Growth</span>
+                <span className="text-amber-600 dark:text-amber-400 font-semibold text-lg">Professional Growth</span>
               </motion.div>
 
-              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent">
                 Internship Placement Program
               </h1>
               <p className="text-xl leading-8 text-muted-foreground mb-8">
@@ -225,32 +225,32 @@ const InternshipPlacementProgram = () => {
 
                 {/* Floating Cards */}
                 <motion.div
-                  className="absolute -top-6 -left-6 bg-white rounded-xl shadow-lg p-4 border"
+                  className="absolute -top-6 -left-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 border dark:border-gray-600"
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-green-100 rounded-lg">
-                      <CheckCircle className="h-5 w-5 text-green-600" />
+                    <div className="p-2 bg-green-100 dark:bg-green-900/50 rounded-lg">
+                      <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
                     </div>
                     <div>
-                      <p className="font-semibold text-sm">500+ Students</p>
+                      <p className="font-semibold text-sm dark:text-gray-100">500+ Students</p>
                       <p className="text-xs text-muted-foreground">Successfully Placed</p>
                     </div>
                   </div>
                 </motion.div>
 
                 <motion.div
-                  className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-lg p-4 border"
+                  className="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 border dark:border-gray-600"
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                      <Building className="h-5 w-5 text-blue-600" />
+                    <div className="p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg">
+                      <Building className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
-                      <p className="font-semibold text-sm">75+ Companies</p>
+                      <p className="font-semibold text-sm dark:text-gray-100">75+ Companies</p>
                       <p className="text-xs text-muted-foreground">Industry Partners</p>
                     </div>
                   </div>
@@ -263,7 +263,7 @@ const InternshipPlacementProgram = () => {
         {/* Enhanced background elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <motion.div
-            className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-amber-200 to-orange-200 rounded-full opacity-20 blur-xl"
+            className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-amber-200 to-orange-200 dark:from-amber-400/30 dark:to-orange-400/30 rounded-full opacity-20 blur-xl"
             animate={{
               y: [0, -30, 0],
               rotate: [0, 180, 360],
@@ -276,7 +276,7 @@ const InternshipPlacementProgram = () => {
             }}
           />
           <motion.div
-            className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-blue-200 to-purple-200 rounded-full opacity-20 blur-xl"
+            className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-br from-blue-200 to-purple-200 dark:from-blue-400/30 dark:to-purple-400/30 rounded-full opacity-20 blur-xl"
             animate={{
               y: [0, 30, 0],
               x: [0, -20, 0],
@@ -289,7 +289,7 @@ const InternshipPlacementProgram = () => {
             }}
           />
           <motion.div
-            className="absolute bottom-20 left-1/3 w-20 h-20 bg-gradient-to-br from-green-200 to-teal-200 rounded-full opacity-20 blur-xl"
+            className="absolute bottom-20 left-1/3 w-20 h-20 bg-gradient-to-br from-green-200 to-teal-200 dark:from-green-400/30 dark:to-teal-400/30 rounded-full opacity-20 blur-xl"
             animate={{
               rotate: [0, -180, -360],
               scale: [1, 1.2, 1]
@@ -333,7 +333,7 @@ const InternshipPlacementProgram = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-white">
+      <section id="services" className="py-20 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -361,7 +361,7 @@ const InternshipPlacementProgram = () => {
             {/* Service Cards with Images */}
             {services.map((service, index) => (
               <motion.div key={index} variants={itemVariants}>
-                <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg">
+                <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg dark:bg-gray-800">
                   <div className="relative h-48 overflow-hidden">
                     <img
                       src={getServiceImage(service.title)}
@@ -370,8 +370,8 @@ const InternshipPlacementProgram = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                     <div className="absolute bottom-4 left-4 flex items-center space-x-3">
-                      <div className="p-2 bg-white/90 backdrop-blur-sm rounded-lg">
-                        <service.icon className="h-6 w-6 text-amber-600" />
+                      <div className="p-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg">
+                        <service.icon className="h-6 w-6 text-amber-600 dark:text-amber-400" />
                       </div>
                       <h3 className="text-white font-semibold text-lg">{service.title}</h3>
                     </div>
@@ -381,8 +381,8 @@ const InternshipPlacementProgram = () => {
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-center text-sm">
-                          <CheckCircle className="h-4 w-4 text-amber-600 mr-3 flex-shrink-0" />
-                          <span>{feature}</span>
+                          <CheckCircle className="h-4 w-4 text-amber-600 dark:text-amber-400 mr-3 flex-shrink-0" />
+                          <span className="dark:text-gray-300">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -394,7 +394,7 @@ const InternshipPlacementProgram = () => {
 
           {/* Process Flow with Images */}
           <motion.div
-            className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-3xl p-8 lg:p-12"
+            className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/50 dark:to-orange-950/50 rounded-3xl p-8 lg:p-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -448,11 +448,11 @@ const InternshipPlacementProgram = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-amber-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-amber-600 dark:bg-amber-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
                       {item.step}
                     </div>
                   </div>
-                  <h4 className="font-semibold mb-2">{item.title}</h4>
+                  <h4 className="font-semibold mb-2 dark:text-gray-100">{item.title}</h4>
                   <p className="text-sm text-muted-foreground">{item.description}</p>
                 </motion.div>
               ))}
@@ -462,7 +462,7 @@ const InternshipPlacementProgram = () => {
       </section>
 
       {/* Available Internships Section */}
-      <section id="internships" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <section id="internships" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -472,8 +472,8 @@ const InternshipPlacementProgram = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="flex justify-center mb-6">
-              <div className="p-3 bg-gradient-to-r from-amber-100 to-orange-100 rounded-full">
-                <Briefcase className="h-8 w-8 text-amber-600" />
+              <div className="p-3 bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 rounded-full">
+                <Briefcase className="h-8 w-8 text-amber-600 dark:text-amber-400" />
               </div>
             </div>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
@@ -498,7 +498,7 @@ const InternshipPlacementProgram = () => {
                   className={`${
                     filter === filterOption.key
                       ? 'bg-amber-600 hover:bg-amber-700 shadow-lg'
-                      : 'hover:bg-amber-50 hover:border-amber-200'
+                      : 'hover:bg-amber-50 hover:border-amber-200 dark:hover:bg-amber-950/50 dark:hover:border-amber-700'
                   } transition-all duration-200`}
                   size="lg"
                 >
@@ -524,7 +524,7 @@ const InternshipPlacementProgram = () => {
             >
               {internships.slice(0, 6).map((internship) => (
                 <motion.div key={internship.internship_id} variants={itemVariants}>
-                  <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border-0 shadow-lg bg-white">
+                  <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border-0 shadow-lg bg-white dark:bg-gray-800">
                     {/* Card Header with Image */}
                     <div className="relative h-48 overflow-hidden">
                       <img
@@ -537,7 +537,7 @@ const InternshipPlacementProgram = () => {
                       {/* Company Logo and Badge */}
                       <div className="absolute top-4 left-4 flex items-center space-x-2">
                         {internship.company_logo && (
-                          <div className="w-10 h-10 rounded-lg overflow-hidden bg-white/90 backdrop-blur-sm p-1">
+                          <div className="w-10 h-10 rounded-lg overflow-hidden bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-1">
                             <img
                               src={internship.company_logo}
                               alt={internship.company_name}
@@ -580,22 +580,22 @@ const InternshipPlacementProgram = () => {
                       {/* Key Details */}
                       <div className="grid grid-cols-2 gap-3 mb-4">
                         <div className="flex items-center text-sm">
-                          <Clock className="h-4 w-4 mr-2 text-amber-600" />
-                          <span className="font-medium">{internship.duration_months} months</span>
+                          <Clock className="h-4 w-4 mr-2 text-amber-600 dark:text-amber-400" />
+                          <span className="font-medium dark:text-gray-200">{internship.duration_months} months</span>
                         </div>
                         <div className="flex items-center text-sm">
-                          <Target className="h-4 w-4 mr-2 text-amber-600" />
-                          <span className="font-medium">{internship.industry}</span>
+                          <Target className="h-4 w-4 mr-2 text-amber-600 dark:text-amber-400" />
+                          <span className="font-medium dark:text-gray-200">{internship.industry}</span>
                         </div>
                         {internship.type === 'paid' && internship.stipend_amount && (
                           <div className="flex items-center text-sm">
-                            <DollarSign className="h-4 w-4 mr-2 text-green-600" />
-                            <span className="font-medium text-green-600">K {internship.stipend_amount}/month</span>
+                            <DollarSign className="h-4 w-4 mr-2 text-green-600 dark:text-green-400" />
+                            <span className="font-medium text-green-600 dark:text-green-400">K {internship.stipend_amount}/month</span>
                           </div>
                         )}
                         <div className="flex items-center text-sm">
-                          <Users className="h-4 w-4 mr-2 text-blue-600" />
-                          <span className="font-medium">{internship.total_applications} applied</span>
+                          <Users className="h-4 w-4 mr-2 text-blue-600 dark:text-blue-400" />
+                          <span className="font-medium dark:text-gray-200">{internship.total_applications} applied</span>
                         </div>
                       </div>
 
@@ -635,7 +635,7 @@ const InternshipPlacementProgram = () => {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+      <section className="py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/30 dark:via-orange-950/30 dark:to-yellow-950/30">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -654,12 +654,12 @@ const InternshipPlacementProgram = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Pricing Card */}
-              <Card className="relative overflow-hidden shadow-2xl border-0">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full -translate-y-16 translate-x-16 opacity-10"></div>
+              <Card className="relative overflow-hidden shadow-2xl border-0 dark:bg-gray-800">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400 to-orange-500 dark:from-amber-500/50 dark:to-orange-600/50 rounded-full -translate-y-16 translate-x-16 opacity-10"></div>
                 <CardHeader className="text-center pb-8">
                   <div className="flex justify-center mb-4">
-                    <div className="p-3 bg-gradient-to-r from-amber-100 to-orange-100 rounded-full">
-                      <Award className="h-8 w-8 text-amber-600" />
+                    <div className="p-3 bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 rounded-full">
+                      <Award className="h-8 w-8 text-amber-600 dark:text-amber-400" />
                     </div>
                   </div>
                   <CardTitle className="text-2xl">Placement Program</CardTitle>
@@ -667,7 +667,7 @@ const InternshipPlacementProgram = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="text-center mb-8">
-                    <div className="text-4xl font-bold text-amber-600 mb-2">Contact Us</div>
+                    <div className="text-4xl font-bold text-amber-600 dark:text-amber-400 mb-2">Contact Us</div>
                     <div className="text-sm text-muted-foreground">for pricing details</div>
                   </div>
 
@@ -681,10 +681,10 @@ const InternshipPlacementProgram = () => {
                       { icon: Target, text: "Career development support" }
                     ].map((feature, index) => (
                       <li key={index} className="flex items-center">
-                        <div className="p-1 bg-amber-100 rounded mr-3">
-                          <feature.icon className="h-4 w-4 text-amber-600" />
+                        <div className="p-1 bg-amber-100 dark:bg-amber-900/50 rounded mr-3">
+                          <feature.icon className="h-4 w-4 text-amber-600 dark:text-amber-400" />
                         </div>
-                        <span className="text-sm">{feature.text}</span>
+                        <span className="text-sm dark:text-gray-300">{feature.text}</span>
                       </li>
                     ))}
                   </ul>
@@ -741,23 +741,23 @@ const InternshipPlacementProgram = () => {
 
                 {/* Floating Success Stats */}
                 <motion.div
-                  className="absolute -top-4 -left-4 bg-white rounded-xl shadow-lg p-4 border"
+                  className="absolute -top-4 -left-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 border dark:border-gray-600"
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">95%</div>
+                    <div className="text-2xl font-bold text-green-600 dark:text-green-400">95%</div>
                     <div className="text-xs text-muted-foreground">Success Rate</div>
                   </div>
                 </motion.div>
 
                 <motion.div
-                  className="absolute -bottom-4 -right-4 bg-white rounded-xl shadow-lg p-4 border"
+                  className="absolute -bottom-4 -right-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 border dark:border-gray-600"
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
                 >
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">500+</div>
+                    <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">500+</div>
                     <div className="text-xs text-muted-foreground">Graduates</div>
                   </div>
                 </motion.div>

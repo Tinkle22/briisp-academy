@@ -188,7 +188,7 @@ const RefresherCoursesPage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-950/50 dark:via-indigo-950/50 dark:to-purple-950/50 overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
@@ -204,13 +204,13 @@ const RefresherCoursesPage = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
-                <div className="p-3 bg-amber-100 rounded-full mr-4">
+                <div className="p-3 bg-amber-100 dark:bg-amber-900/50 rounded-full mr-4">
                   <GraduationCap className="h-8 w-8 text-amber-600" />
                 </div>
                 <span className="text-amber-600 font-semibold text-lg">Professional Development</span>
               </motion.div>
 
-              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6 bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-100 dark:to-gray-400 bg-clip-text text-transparent">
                 Refresher Course Platform
               </h1>
               <p className="text-xl leading-8 text-muted-foreground mb-8">
@@ -258,12 +258,12 @@ const RefresherCoursesPage = () => {
 
                 {/* Floating Statistics Cards */}
                 <motion.div
-                  className="absolute -top-6 -left-6 bg-white rounded-xl shadow-lg p-4 border"
+                  className="absolute -top-6 -left-6 bg-white dark:bg-gray-800/80 rounded-xl shadow-lg p-4 border dark:border-gray-700"
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-green-100 rounded-lg">
+                    <div className="p-2 bg-green-100 dark:bg-green-900/50 rounded-lg">
                       <CheckCircle className="h-5 w-5 text-green-600" />
                     </div>
                     <div>
@@ -274,12 +274,12 @@ const RefresherCoursesPage = () => {
                 </motion.div>
 
                 <motion.div
-                  className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-lg p-4 border"
+                  className="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800/80 rounded-xl shadow-lg p-4 border dark:border-gray-700"
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-blue-100 rounded-lg">
+                    <div className="p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg">
                       <Award className="h-5 w-5 text-blue-600" />
                     </div>
                     <div>
@@ -366,7 +366,7 @@ const RefresherCoursesPage = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -402,7 +402,7 @@ const RefresherCoursesPage = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                     <div className="absolute bottom-4 left-4 flex items-center space-x-3">
-                      <div className="p-2 bg-white/90 backdrop-blur-sm rounded-lg">
+                      <div className="p-2 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-lg">
                         <feature.icon className="h-6 w-6 text-amber-600" />
                       </div>
                       <h3 className="text-white font-semibold text-lg">{feature.title}</h3>
@@ -418,7 +418,7 @@ const RefresherCoursesPage = () => {
 
           {/* Process Flow */}
           <motion.div
-            className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-3xl p-8 lg:p-12"
+            className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/50 dark:to-orange-950/50 rounded-3xl p-8 lg:p-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -516,7 +516,7 @@ const RefresherCoursesPage = () => {
       </section>
 
       {/* Available Courses */}
-      <section id="courses" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <section id="courses" className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -526,7 +526,7 @@ const RefresherCoursesPage = () => {
             transition={{ duration: 0.6 }}
           >
             <div className="flex justify-center mb-6">
-              <div className="p-3 bg-gradient-to-r from-amber-100 to-orange-100 rounded-full">
+              <div className="p-3 bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 rounded-full">
                 <BookOpen className="h-8 w-8 text-amber-600" />
               </div>
             </div>
@@ -551,7 +551,7 @@ const RefresherCoursesPage = () => {
                 const CourseIcon = getCourseIcon(course.title);
                 return (
                   <motion.div key={course.course_id} variants={itemVariants}>
-                    <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border-0 shadow-lg bg-white">
+                    <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-2 overflow-hidden border-0 shadow-lg bg-white dark:bg-gray-800">
                       {/* Course Header with Image */}
                       <div className="relative h-48 overflow-hidden">
                         <img
@@ -563,7 +563,7 @@ const RefresherCoursesPage = () => {
 
                         {/* Course Icon and Badge */}
                         <div className="absolute top-4 left-4 flex items-center space-x-2">
-                          <div className="w-10 h-10 rounded-lg bg-white/90 backdrop-blur-sm p-2 flex items-center justify-center">
+                          <div className="w-10 h-10 rounded-lg bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm p-2 flex items-center justify-center">
                             <CourseIcon className="h-5 w-5 text-amber-600" />
                           </div>
                         </div>
@@ -571,7 +571,7 @@ const RefresherCoursesPage = () => {
                         <div className="absolute top-4 right-4">
                           <Badge
                             variant="outline"
-                            className="bg-white/90 backdrop-blur-sm border-white/20 text-gray-900"
+                            className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-white/20 dark:border-gray-600/20 text-gray-900 dark:text-gray-100"
                           >
                             {course.skill_level}
                           </Badge>
@@ -650,7 +650,7 @@ const RefresherCoursesPage = () => {
       </section>
 
       {/* Investment Section */}
-      <section id="apply" className="py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50">
+      <section id="apply" className="py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/50 dark:via-orange-950/50 dark:to-yellow-950/50">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -669,11 +669,11 @@ const RefresherCoursesPage = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               {/* Pricing Card */}
-              <Card className="relative overflow-hidden shadow-2xl border-0">
+              <Card className="relative overflow-hidden shadow-2xl border-0 dark:bg-gray-800">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full -translate-y-16 translate-x-16 opacity-10"></div>
                 <CardHeader className="text-center pb-8">
                   <div className="flex justify-center mb-4">
-                    <div className="p-3 bg-gradient-to-r from-amber-100 to-orange-100 rounded-full">
+                    <div className="p-3 bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 rounded-full">
                       <GraduationCap className="h-8 w-8 text-amber-600" />
                     </div>
                   </div>
@@ -696,7 +696,7 @@ const RefresherCoursesPage = () => {
                       { icon: TrendingUp, text: "Progress tracking and assessment" }
                     ].map((feature, index) => (
                       <li key={index} className="flex items-center">
-                        <div className="p-1 bg-amber-100 rounded mr-3">
+                        <div className="p-1 bg-amber-100 dark:bg-amber-900/50 rounded mr-3">
                           <feature.icon className="h-4 w-4 text-amber-600" />
                         </div>
                         <span className="text-sm">{feature.text}</span>

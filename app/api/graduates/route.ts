@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { Graduate, Project, SocialLink } from '@/lib/types';
-import { uploadToCloudinary } from '@/lib/cloudinary';
-
+import { RowDataPacket } from 'mysql2';
+import { fileStorage } from '@/lib/file-storage';
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -70,14 +70,16 @@ export async function POST(request: Request) {
     let certificateFileUrl = '';
     const certificateFile = formData.get('certificate_file') as File;
     if (certificateFile) {
-      certificateFileUrl = await uploadToCloudinary(certificateFile, 'certificates');
+      const certificateResult = await fileStorage.uploadFile(certificateFile, 'graduates');
+      certificateFileUrl = certificateResult.url;
     }
 
     // Upload graduate image file (if provided)
     let graduateImageUrl = '';
     const graduateImage = formData.get('graduate_image') as File;
     if (graduateImage) {
-      graduateImageUrl = await uploadToCloudinary(graduateImage, 'graduates');
+      const imageResult = await fileStorage.uploadFile(graduateImage, 'graduates');
+      graduateImageUrl = imageResult.url;
     }
 
     // Parse JSON strings stored in formData
@@ -98,9 +100,12 @@ export async function POST(request: Request) {
 
     // Insert projects
     for (const project of projectsData) {
+      // Convert completion_date from ISO string to MySQL DATE format
+      const completionDate = project.completion_date ? new Date(project.completion_date).toISOString().split('T')[0] : null;
+      
       await connection.query(
         'INSERT INTO projects SET ?',
-        { ...project, graduate_id: graduateId }
+        { ...project, graduate_id: graduateId, completion_date: completionDate }
       );
     }
 

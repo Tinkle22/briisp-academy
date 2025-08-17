@@ -165,7 +165,7 @@ const GeneralInternshipApplication = () => {
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, duration: 0.5 }}
             >
-              <div className="p-4 bg-amber-100 rounded-full">
+              <div className="p-4 bg-amber-100 dark:bg-amber-900/50 rounded-full">
                 <Briefcase className="h-12 w-12 text-amber-600" />
               </div>
             </motion.div>
@@ -186,8 +186,8 @@ const GeneralInternshipApplication = () => {
               transition={{ delay: 0.6, duration: 0.5 }}
             >
               {programBenefits.map((benefit, index) => (
-                <div key={index} className="flex items-center space-x-3 p-4 bg-muted rounded-lg">
-                  <div className="p-2 bg-amber-100 rounded-lg">
+                <div key={index} className="flex items-center space-x-3 p-4 bg-muted dark:bg-gray-800 rounded-lg">
+                  <div className="p-2 bg-amber-100 dark:bg-amber-900/50 rounded-lg">
                     <benefit.icon className="h-5 w-5 text-amber-600" />
                   </div>
                   <div className="text-left">
@@ -203,7 +203,7 @@ const GeneralInternshipApplication = () => {
         {/* Animated background elements */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <motion.div
-            className="absolute top-20 left-10 w-20 h-20 bg-amber-200 rounded-full opacity-20"
+            className="absolute top-20 left-10 w-20 h-20 bg-amber-200 dark:bg-amber-800 rounded-full opacity-20"
             animate={{
               y: [0, -20, 0],
               rotate: [0, 180, 360]
@@ -215,7 +215,7 @@ const GeneralInternshipApplication = () => {
             }}
           />
           <motion.div
-            className="absolute top-40 right-20 w-16 h-16 bg-blue-200 rounded-full opacity-20"
+            className="absolute top-40 right-20 w-16 h-16 bg-blue-200 dark:bg-blue-800 rounded-full opacity-20"
             animate={{
               y: [0, 20, 0],
               x: [0, -10, 0]
@@ -237,7 +237,7 @@ const GeneralInternshipApplication = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            <Card className="p-6 sm:p-8">
+            <Card className="p-6 sm:p-8 dark:bg-gray-800">
               <CardHeader className="text-center pb-8">
                 <CardTitle className="text-2xl">Internship Application Form</CardTitle>
                 <CardDescription>

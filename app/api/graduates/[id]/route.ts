@@ -1,12 +1,8 @@
 import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
-import { uploadToCloudinary } from '@/lib/cloudinary';
+import { Graduate, Project, SocialLink } from '@/lib/types';
 import { RowDataPacket } from 'mysql2';
-
-interface Graduate extends RowDataPacket {
-  graduate_id: string;
-  // add other properties as needed
-}
+import { fileStorage } from '@/lib/file-storage';
 
 export async function GET(
   request: Request,
@@ -60,7 +56,16 @@ export async function PUT(
     let certificateFileUrl = undefined;
     const certificateFile = formData.get('certificate_file') as File;
     if (certificateFile) {
-      certificateFileUrl = await uploadToCloudinary(certificateFile, 'certificates');
+      const certificateResult = await fileStorage.uploadFile(certificateFile, 'graduates');
+      certificateFileUrl = certificateResult.url;
+    }
+
+    // Handle graduate image upload if provided
+    let graduateImageUrl = undefined;
+    const graduateImage = formData.get('graduate_image') as File;
+    if (graduateImage) {
+      const imageResult = await fileStorage.uploadFile(graduateImage, 'graduates');
+      graduateImageUrl = imageResult.url;
     }
 
     // Parse JSON strings from form data
@@ -74,7 +79,8 @@ export async function PUT(
       [
         {
           ...graduateData,
-          ...(certificateFileUrl && { certificate_file_url: certificateFileUrl })
+          ...(certificateFileUrl && { certificate_file_url: certificateFileUrl }),
+          ...(graduateImageUrl && { graduate_image_url: graduateImageUrl })
         },
         params.id
       ]
@@ -86,9 +92,12 @@ export async function PUT(
 
     // Insert updated projects
     for (const project of projectsData) {
+      // Convert completion_date from ISO string to MySQL DATE format
+      const completionDate = project.completion_date ? new Date(project.completion_date).toISOString().split('T')[0] : null;
+      
       await connection.query(
         'INSERT INTO projects SET ?',
-        { ...project, graduate_id: params.id }
+        { ...project, graduate_id: params.id, completion_date: completionDate }
       );
     }
 

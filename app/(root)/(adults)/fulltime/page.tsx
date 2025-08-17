@@ -107,11 +107,11 @@ const FullTimeCourses = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="lg:w-80">
+          {/* <div className="lg:w-80">
             <div className="sticky top-6">
               <AccommodationCard />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

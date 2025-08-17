@@ -137,7 +137,7 @@ export default function PitchDeckStartupFundingPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 dark:from-amber-950/50 dark:via-orange-950/50 dark:to-yellow-950/50 overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
@@ -153,12 +153,12 @@ export default function PitchDeckStartupFundingPage() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
-                <div className="p-3 bg-amber-100 rounded-full mr-4">
+                <div className="p-3 bg-amber-100 dark:bg-amber-900/50 rounded-full mr-4">
                   <Presentation className="h-8 w-8 text-amber-600" />
                 </div>
                 <span className="text-amber-600 font-semibold text-lg">Startup Success</span>
               </motion.div>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6 bg-gradient-to-r from-gray-900 to-orange-600 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6 bg-gradient-to-r from-gray-900 to-orange-600 dark:from-gray-100 dark:to-orange-400 bg-clip-text text-transparent">
                 Pitch Deck & Startup Funding Help
               </h1>
               <p className="text-xl leading-8 text-muted-foreground mb-8">
@@ -176,11 +176,7 @@ export default function PitchDeckStartupFundingPage() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="#services">
-                  <Button variant="outline" size="lg" className="border-2">
-                    Learn More
-                  </Button>
-                </Link>
+          
               </motion.div>
             </motion.div>
             {/* Right Visual */}
@@ -201,12 +197,12 @@ export default function PitchDeckStartupFundingPage() {
                 </div>
                 {/* Floating Cards */}
                 <motion.div
-                  className="absolute -top-6 -left-6 bg-white/80 backdrop-blur-lg rounded-xl shadow-lg p-4 border"
+                  className="absolute -top-6 -left-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-xl shadow-lg p-4 border dark:border-gray-700"
                   animate={{ y: [0, -10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-green-100 rounded-lg">
+                    <div className="p-2 bg-green-100 dark:bg-green-900/50 rounded-lg">
                       <CheckCircle className="h-5 w-5 text-green-600" />
                     </div>
                     <div>
@@ -216,12 +212,12 @@ export default function PitchDeckStartupFundingPage() {
                   </div>
                 </motion.div>
                 <motion.div
-                  className="absolute -bottom-6 -right-6 bg-white/80 backdrop-blur-lg rounded-xl shadow-lg p-4 border"
+                  className="absolute -bottom-6 -right-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-xl shadow-lg p-4 border dark:border-gray-700"
                   animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-blue-100 rounded-lg">
+                    <div className="p-2 bg-blue-100 dark:bg-blue-900/50 rounded-lg">
                       <Handshake className="h-5 w-5 text-blue-600" />
                     </div>
                     <div>
@@ -301,7 +297,7 @@ export default function PitchDeckStartupFundingPage() {
         </div>
       </section>
       {/* Services Section */}
-      <section id="services" className="py-20 bg-white">
+      <section id="services" className="py-20 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -326,9 +322,9 @@ export default function PitchDeckStartupFundingPage() {
           >
             {services.map((service, index) => (
               <motion.div key={index} variants={itemVariants}>
-                <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg bg-white/80 backdrop-blur-md">
+                <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-md">
                   <CardHeader className="flex flex-row items-center gap-4 pb-2">
-                    <div className="p-3 bg-amber-100 rounded-full">
+                    <div className="p-3 bg-amber-100 dark:bg-amber-900/50 rounded-full">
                       <service.icon className="h-7 w-7 text-amber-600" />
                     </div>
                     <CardTitle className="text-lg font-semibold">{service.title}</CardTitle>
@@ -343,7 +339,7 @@ export default function PitchDeckStartupFundingPage() {
         </div>
       </section>
       {/* Target Audience Section */}
-      <section className="py-20 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50">
+      <section className="py-20 bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 dark:from-orange-950/50 dark:via-amber-950/50 dark:to-yellow-950/50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -368,9 +364,9 @@ export default function PitchDeckStartupFundingPage() {
           >
             {audience.map((item, index) => (
               <motion.div key={index} variants={itemVariants}>
-                <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg bg-white/80 backdrop-blur-md">
+                <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 shadow-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-md">
                   <CardHeader className="flex flex-row items-center gap-4 pb-2">
-                    <div className="p-3 bg-orange-100 rounded-full">
+                    <div className="p-3 bg-orange-100 dark:bg-orange-900/50 rounded-full">
                       <item.icon className="h-7 w-7 text-orange-600" />
                     </div>
                     <CardTitle className="text-lg font-semibold">{item.title}</CardTitle>
@@ -388,7 +384,7 @@ export default function PitchDeckStartupFundingPage() {
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
-            className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-3xl p-8 lg:p-12"
+            className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/50 dark:to-orange-950/50 rounded-3xl p-8 lg:p-12"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -409,7 +405,7 @@ export default function PitchDeckStartupFundingPage() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <div className="relative mb-4 flex flex-col items-center">
-                    <div className="w-16 h-16 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center shadow-lg mb-2">
+                    <div className="w-16 h-16 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-md flex items-center justify-center shadow-lg mb-2">
                       <item.icon className="h-8 w-8 text-amber-600" />
                     </div>
                     <div className="absolute -top-2 -right-2 w-7 h-7 bg-amber-600 text-white rounded-full flex items-center justify-center text-xs font-bold">
@@ -425,7 +421,7 @@ export default function PitchDeckStartupFundingPage() {
         </div>
       </section>
       {/* Call to Action Section */}
-      <section id="apply" className="py-20 bg-gradient-to-br from-amber-100 via-orange-100 to-yellow-100">
+      <section id="apply" className="py-20 bg-gradient-to-br from-amber-100 via-orange-100 to-yellow-100 dark:from-amber-900/50 dark:via-orange-900/50 dark:to-yellow-900/50">
         <div className="mx-auto max-w-3xl px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -450,4 +446,4 @@ export default function PitchDeckStartupFundingPage() {
       </section>
     </div>
   );
-} 
+}

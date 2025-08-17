@@ -282,7 +282,7 @@ export default function FinalYearProjectSupportPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50 dark:from-slate-900 dark:via-gray-900 dark:to-blue-950 relative overflow-hidden">
       {/* Hero Section - Enhanced with Parallax */}
       <section ref={heroRef} className="relative py-20 overflow-hidden">
         {/* Enhanced Background with Gradient Overlay */}
@@ -290,8 +290,8 @@ export default function FinalYearProjectSupportPage() {
           style={{ y, opacity }}
           className="absolute inset-0 -z-20"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-600/10 via-blue-600/5 to-purple-600/10" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-400/20 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-600/10 via-blue-600/5 to-purple-600/10 dark:from-amber-400/20 dark:via-blue-400/10 dark:to-purple-400/20" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-400/20 via-transparent to-transparent dark:from-amber-300/30" />
 
           {/* Geometric Background Pattern */}
           <div className="absolute inset-0 opacity-5">
@@ -391,7 +391,7 @@ export default function FinalYearProjectSupportPage() {
                   transition={{ delay: 0.2, duration: 0.6 }}
                   className="flex items-center gap-3"
                 >
-                  <Badge className="bg-gradient-to-r from-amber-100 to-orange-100 text-amber-800 hover:from-amber-200 hover:to-orange-200 px-4 py-2 text-sm font-semibold border border-amber-200">
+                  <Badge className="bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 text-amber-800 dark:text-amber-200 hover:from-amber-200 hover:to-orange-200 dark:hover:from-amber-800/70 dark:hover:to-orange-800/70 px-4 py-2 text-sm font-semibold border border-amber-200 dark:border-amber-700">
                     <Sparkles className="w-4 h-4 mr-2" />
                     Academic Excellence
                   </Badge>
@@ -412,17 +412,17 @@ export default function FinalYearProjectSupportPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4, duration: 0.8 }}
                 >
-                  <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-gray-100 dark:via-gray-200 dark:to-gray-100 bg-clip-text text-transparent">
                     Final Year
                   </span>
                   <br />
-                  <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 dark:from-amber-400 dark:via-orange-400 dark:to-red-400 bg-clip-text text-transparent">
                     Project Support
                   </span>
                 </motion.h1>
 
                 <motion.p
-                  className="text-lg text-gray-600 leading-relaxed max-w-3xl"
+                  className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.8 }}
@@ -436,12 +436,12 @@ export default function FinalYearProjectSupportPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8, duration: 0.6 }}
-                  className="flex flex-wrap gap-4 text-sm text-gray-600"
+                  className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-300"
                 >
                   {['Expert Supervision', '24/7 Support', 'Plagiarism-Free', 'University Standards'].map((feature, index) => (
                     <motion.div
                       key={feature}
-                      className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-3 py-2 rounded-full border border-gray-200"
+                      className="flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm px-3 py-2 rounded-full border border-gray-200 dark:border-gray-600"
                       whileHover={{ scale: 1.05, backgroundColor: 'rgba(251, 191, 36, 0.1)' }}
                     >
                       <CheckCircle className="w-4 h-4 text-green-500" />
@@ -511,9 +511,9 @@ export default function FinalYearProjectSupportPage() {
                     }}
                     className="group"
                   >
-                    <Card className="relative p-6 text-center backdrop-blur-xl bg-gradient-to-br from-white/90 to-white/70 border border-white/20 shadow-2xl hover:shadow-amber-500/20 transition-all duration-500 rounded-3xl overflow-hidden">
+                    <Card className="relative p-6 text-center backdrop-blur-xl bg-gradient-to-br from-white/90 to-white/70 dark:from-gray-800/90 dark:to-gray-700/70 border border-white/20 dark:border-gray-600/20 shadow-2xl hover:shadow-amber-500/20 transition-all duration-500 rounded-3xl overflow-hidden">
                       {/* Gradient Background Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-orange-500/5 dark:from-amber-400/10 dark:via-transparent dark:to-orange-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                       {/* Animated Icon */}
                       <motion.div
@@ -536,7 +536,7 @@ export default function FinalYearProjectSupportPage() {
 
                       {/* Animated Counter */}
                       <motion.div
-                        className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-2"
+                        className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent mb-2"
                         initial={{ scale: 0.5 }}
                         animate={{ scale: 1 }}
                         transition={{ delay: 0.8 + index * 0.1, duration: 0.5 }}
@@ -544,7 +544,7 @@ export default function FinalYearProjectSupportPage() {
                         <AnimatedCounter value={stat.value} duration={2 + index * 0.5} />
                       </motion.div>
 
-                      <div className="text-sm font-medium text-gray-600 uppercase tracking-wider">
+                      <div className="text-sm font-medium text-gray-600 dark:text-gray-300 uppercase tracking-wider">
                         {stat.label}
                       </div>
 
@@ -561,7 +561,7 @@ export default function FinalYearProjectSupportPage() {
       </section>
 
       {/* Enhanced Services Offered Section */}
-      <section className="py-20 bg-gradient-to-br from-white via-gray-50/50 to-blue-50/30 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-white via-gray-50/50 to-blue-50/30 dark:from-gray-900 dark:via-gray-800/50 dark:to-blue-950/30 relative overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0 dot-pattern" />
@@ -580,22 +580,22 @@ export default function FinalYearProjectSupportPage() {
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-100 to-orange-100 px-6 py-3 rounded-full mb-6"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-100 to-orange-100 dark:from-amber-900/50 dark:to-orange-900/50 px-6 py-3 rounded-full mb-6"
             >
-              <Microscope className="w-5 h-5 text-amber-600" />
-              <span className="text-amber-800 font-semibold">Research Excellence</span>
+              <Microscope className="w-5 h-5 text-amber-600 dark:text-amber-400" />
+              <span className="text-amber-800 dark:text-amber-300 font-semibold">Research Excellence</span>
             </motion.div>
 
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-              <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-gray-100 dark:via-gray-200 dark:to-gray-100 bg-clip-text text-transparent">
                 Comprehensive Project
               </span>
               <br />
-              <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 dark:from-amber-400 dark:via-orange-400 dark:to-red-400 bg-clip-text text-transparent">
                 Support Services
               </span>
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
               From initial concept to final presentation, we provide end-to-end support
               for your academic journey with cutting-edge tools and expert guidance.
             </p>
@@ -618,7 +618,7 @@ export default function FinalYearProjectSupportPage() {
                 >
                   {/* Mobile/Tablet Version - Simple Card */}
                   <div className="block lg:hidden">
-                    <Card className="w-full h-full p-6 backdrop-blur-xl bg-gradient-to-br from-white/90 to-white/70 border border-white/20 shadow-2xl rounded-3xl hover:shadow-amber-500/20 transition-all duration-300 hover:-translate-y-2">
+                    <Card className="w-full h-full p-6 backdrop-blur-xl bg-gradient-to-br from-white/90 to-white/70 dark:from-gray-800/90 dark:to-gray-700/70 border border-white/20 dark:border-gray-600/20 shadow-2xl rounded-3xl hover:shadow-amber-500/20 transition-all duration-300 hover:-translate-y-2">
                       <div className="flex flex-col h-full">
                         <motion.div
                           className={`inline-flex items-center justify-center w-16 h-16 rounded-3xl ${service.color} text-white mb-4 shadow-lg flex-shrink-0`}
@@ -631,10 +631,10 @@ export default function FinalYearProjectSupportPage() {
                           <IconComponent className="h-8 w-8" />
                         </motion.div>
 
-                        <h3 className="text-xl font-semibold text-gray-900 mb-4 leading-tight flex-shrink-0">
+                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 leading-tight flex-shrink-0">
                           {service.title}
                         </h3>
-                        <p className="text-gray-600 leading-relaxed flex-grow text-sm">
+                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed flex-grow text-sm">
                           {service.description}
                         </p>
                       </div>
@@ -648,7 +648,7 @@ export default function FinalYearProjectSupportPage() {
                       whileHover={{ scale: 1.02 }}
                     >
                     {/* Front of Card */}
-                    <Card className="absolute inset-0 w-full h-full p-6 backdrop-blur-xl bg-gradient-to-br from-white/90 to-white/70 border border-white/20 shadow-2xl rounded-3xl backface-hidden overflow-hidden">
+                    <Card className="absolute inset-0 w-full h-full p-6 backdrop-blur-xl bg-gradient-to-br from-white/90 to-white/70 dark:from-gray-800/90 dark:to-gray-700/70 border border-white/20 dark:border-gray-600/20 shadow-2xl rounded-3xl backface-hidden overflow-hidden">
                       <div className="flex flex-col h-full">
                         <motion.div
                           className={`inline-flex items-center justify-center w-16 h-16 rounded-3xl ${service.color} text-white mb-4 shadow-lg flex-shrink-0`}
@@ -661,10 +661,10 @@ export default function FinalYearProjectSupportPage() {
                           <IconComponent className="h-8 w-8" />
                         </motion.div>
 
-                        <h3 className="text-xl font-semibold text-gray-900 mb-4 leading-tight flex-shrink-0">
+                        <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 leading-tight flex-shrink-0">
                           {service.title}
                         </h3>
-                        <p className="text-gray-600 leading-relaxed flex-grow text-sm">
+                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed flex-grow text-sm">
                           {service.description}
                         </p>
 
@@ -678,19 +678,19 @@ export default function FinalYearProjectSupportPage() {
                     </Card>
 
                     {/* Back of Card */}
-                    <Card className="absolute inset-0 w-full h-full p-6 backdrop-blur-xl bg-gradient-to-br from-amber-500/90 to-orange-600/90 border border-amber-300/20 shadow-2xl rounded-3xl backface-hidden rotate-y-180 text-white overflow-hidden">
+                    <Card className="absolute inset-0 w-full h-full p-6 backdrop-blur-xl bg-gradient-to-br from-amber-500/90 to-orange-600/90 dark:from-amber-600/90 dark:to-orange-700/90 border border-amber-300/20 dark:border-amber-400/20 shadow-2xl rounded-3xl backface-hidden rotate-y-180 text-white overflow-hidden">
                       <div className="flex flex-col h-full justify-center items-center text-center">
                         <IconComponent className="h-12 w-12 mb-4 opacity-80 flex-shrink-0" />
                         <h3 className="text-lg font-bold mb-3 flex-shrink-0">
                           {service.title}
                         </h3>
-                        <p className="text-amber-100 leading-relaxed text-sm mb-4 flex-grow">
+                        <p className="text-amber-100 dark:text-amber-200 leading-relaxed text-sm mb-4 flex-grow">
                           Expert guidance with personalized attention to ensure your project meets the highest academic standards.
                         </p>
                         <Button
                           variant="outline"
                           size="sm"
-                          className="border-white/30 text-white hover:bg-white/20 backdrop-blur-sm flex-shrink-0"
+                          className="border-white/30 dark:border-white/40 text-white hover:bg-white/20 dark:hover:bg-white/30 backdrop-blur-sm flex-shrink-0"
                         >
                           Learn More
                         </Button>
@@ -760,22 +760,22 @@ export default function FinalYearProjectSupportPage() {
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 backdrop-blur-sm px-6 py-3 rounded-full mb-6 border border-amber-500/30"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 dark:from-amber-400/30 dark:to-orange-400/30 backdrop-blur-sm px-6 py-3 rounded-full mb-6 border border-amber-500/30 dark:border-amber-400/40"
             >
-              <Target className="w-5 h-5 text-amber-400" />
-              <span className="text-amber-300 font-semibold">Step-by-Step Process</span>
+              <Target className="w-5 h-5 text-amber-400 dark:text-amber-300" />
+              <span className="text-amber-300 dark:text-amber-200 font-semibold">Step-by-Step Process</span>
             </motion.div>
 
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-              <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white via-gray-100 to-white dark:from-gray-100 dark:via-gray-200 dark:to-gray-100 bg-clip-text text-transparent">
                 Your Research
               </span>
               <br />
-              <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-400 dark:from-amber-300 dark:via-orange-300 dark:to-yellow-300 bg-clip-text text-transparent">
                 Journey
               </span>
             </h2>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-300 dark:text-gray-200 max-w-3xl mx-auto leading-relaxed">
               Follow our proven methodology designed by academic experts to ensure
               your project's success from conception to completion.
             </p>
@@ -850,10 +850,10 @@ export default function FinalYearProjectSupportPage() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 + index * 0.1, duration: 0.6 }}
                   >
-                    <h3 className="text-lg font-semibold text-white mb-3 leading-tight">
+                    <h3 className="text-lg font-semibold text-white dark:text-gray-100 mb-3 leading-tight">
                       {step.title}
                     </h3>
-                    <p className="text-gray-300 leading-relaxed">
+                    <p className="text-gray-300 dark:text-gray-200 leading-relaxed">
                       {step.description}
                     </p>
                   </motion.div>
@@ -874,7 +874,7 @@ export default function FinalYearProjectSupportPage() {
       </section>
 
       {/* Enhanced Benefits Section */}
-      <section className="py-20 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/20 relative">
+      <section className="py-20 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/20 dark:from-gray-900 dark:via-blue-950/30 dark:to-purple-950/20 relative">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -888,22 +888,22 @@ export default function FinalYearProjectSupportPage() {
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-100 to-blue-100 px-6 py-3 rounded-full mb-6"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/50 dark:to-blue-900/50 px-6 py-3 rounded-full mb-6"
             >
-              <Star className="w-5 h-5 text-purple-600" />
-              <span className="text-purple-800 font-semibold">Exclusive Advantages</span>
+              <Star className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+              <span className="text-purple-800 dark:text-purple-300 font-semibold">Exclusive Advantages</span>
             </motion.div>
 
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-              <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-gray-100 dark:via-gray-200 dark:to-gray-100 bg-clip-text text-transparent">
                 Why Choose
               </span>
               <br />
-              <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 dark:from-purple-400 dark:via-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
                 Our Platform
               </span>
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Beyond our core services, enjoy these exclusive advantages that set us apart
               from traditional academic support services.
             </p>
@@ -930,7 +930,7 @@ export default function FinalYearProjectSupportPage() {
                       transition: { duration: 0.3 }
                     }}
                   >
-                    <Card className="h-full p-6 text-center backdrop-blur-xl bg-gradient-to-br from-white/90 to-white/70 border border-white/20 shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 rounded-3xl group-hover:bg-gradient-to-br group-hover:from-purple-50/90 group-hover:to-blue-50/70">
+                    <Card className="h-full p-6 text-center backdrop-blur-xl bg-gradient-to-br from-white/90 to-white/70 dark:from-gray-800/90 dark:to-gray-700/70 border border-white/20 dark:border-gray-600/20 shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 rounded-3xl group-hover:bg-gradient-to-br group-hover:from-purple-50/90 group-hover:to-blue-50/70 dark:group-hover:from-purple-900/50 dark:group-hover:to-blue-900/50">
                       <motion.div
                         className="inline-flex items-center justify-center w-16 h-16 rounded-3xl bg-gradient-to-br from-purple-500 to-blue-600 text-white mb-6 shadow-lg group-hover:shadow-purple-500/50 transition-all duration-500"
                         whileHover={{
@@ -942,10 +942,10 @@ export default function FinalYearProjectSupportPage() {
                         <IconComponent className="h-8 w-8" />
                       </motion.div>
 
-                      <h3 className="text-xl font-semibold text-gray-900 mb-4 leading-tight">
+                      <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4 leading-tight">
                         {benefit.title}
                       </h3>
-                      <p className="text-gray-600 leading-relaxed mb-4">
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
                         {benefit.description}
                       </p>
 
@@ -953,36 +953,36 @@ export default function FinalYearProjectSupportPage() {
                       <div className="space-y-3">
                         {index === 0 && (
                           <>
-                            <div className="flex items-center gap-3 text-sm text-gray-600">
-                              <CheckCircle className="w-4 h-4 text-green-500" />
+                            <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
+                              <CheckCircle className="w-4 h-4 text-green-500 dark:text-green-400" />
                               <span>500+ Successful Projects</span>
                             </div>
-                            <div className="flex items-center gap-3 text-sm text-gray-600">
-                              <CheckCircle className="w-4 h-4 text-green-500" />
+                            <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
+                              <CheckCircle className="w-4 h-4 text-green-500 dark:text-green-400" />
                               <span>Multiple Formats Available</span>
                             </div>
                           </>
                         )}
                         {index === 1 && (
                           <>
-                            <div className="flex items-center gap-3 text-sm text-gray-600">
-                              <CheckCircle className="w-4 h-4 text-green-500" />
+                            <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
+                              <CheckCircle className="w-4 h-4 text-green-500 dark:text-green-400" />
                               <span>PhD-Level Supervisors</span>
                             </div>
-                            <div className="flex items-center gap-3 text-sm text-gray-600">
-                              <CheckCircle className="w-4 h-4 text-green-500" />
+                            <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
+                              <CheckCircle className="w-4 h-4 text-green-500 dark:text-green-400" />
                               <span>Weekly Progress Reviews</span>
                             </div>
                           </>
                         )}
                         {index === 2 && (
                           <>
-                            <div className="flex items-center gap-3 text-sm text-gray-600">
-                              <CheckCircle className="w-4 h-4 text-green-500" />
+                            <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
+                              <CheckCircle className="w-4 h-4 text-green-500 dark:text-green-400" />
                               <span>Latest Software Versions</span>
                             </div>
-                            <div className="flex items-center gap-3 text-sm text-gray-600">
-                              <CheckCircle className="w-4 h-4 text-green-500" />
+                            <div className="flex items-center gap-3 text-sm text-gray-600 dark:text-gray-300">
+                              <CheckCircle className="w-4 h-4 text-green-500 dark:text-green-400" />
                               <span>Video Tutorials Included</span>
                             </div>
                           </>
@@ -999,16 +999,16 @@ export default function FinalYearProjectSupportPage() {
 
      
       {/* Enhanced Call-to-Action Section */}
-      <section className="py-32 bg-gradient-to-br from-amber-600 via-orange-600 to-red-600 relative overflow-hidden">
+      <section className="py-32 bg-gradient-to-br from-amber-600 via-orange-600 to-red-600 dark:from-amber-700 dark:via-orange-700 dark:to-red-700 relative overflow-hidden">
         {/* Enhanced Animated Background */}
         <div className="absolute inset-0">
           {/* Gradient Overlays */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20 dark:from-black/40 dark:via-transparent dark:to-black/40" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent dark:from-white/5 dark:via-transparent dark:to-transparent" />
 
           {/* Floating Elements */}
           <motion.div
-            className="absolute top-20 left-1/4 w-32 h-32 bg-white/10 rounded-full blur-xl"
+            className="absolute top-20 left-1/4 w-32 h-32 bg-white/10 dark:bg-white/5 rounded-full blur-xl"
             animate={{
               y: [0, -40, 0],
               scale: [1, 1.3, 1],
@@ -1021,7 +1021,7 @@ export default function FinalYearProjectSupportPage() {
             }}
           />
           <motion.div
-            className="absolute bottom-20 right-1/4 w-24 h-24 bg-white/10 rounded-full blur-lg"
+            className="absolute bottom-20 right-1/4 w-24 h-24 bg-white/10 dark:bg-white/5 rounded-full blur-lg"
             animate={{
               y: [0, 30, 0],
               x: [0, -30, 0],
@@ -1034,7 +1034,7 @@ export default function FinalYearProjectSupportPage() {
             }}
           />
           <motion.div
-            className="absolute top-1/2 left-10 w-16 h-16 bg-white/5 rounded-full blur-md"
+            className="absolute top-1/2 left-10 w-16 h-16 bg-white/5 dark:bg-white/3 rounded-full blur-md"
             animate={{
               y: [0, -20, 0],
               x: [0, 20, 0],
@@ -1049,12 +1049,12 @@ export default function FinalYearProjectSupportPage() {
 
           {/* Geometric Shapes */}
           <motion.div
-            className="absolute top-32 right-20 w-4 h-4 bg-white/20 transform rotate-45"
+            className="absolute top-32 right-20 w-4 h-4 bg-white/20 dark:bg-white/10 transform rotate-45"
             animate={{ rotate: [45, 405] }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
           />
           <motion.div
-            className="absolute bottom-32 left-20 w-6 h-6 border-2 border-white/20 rounded-full"
+            className="absolute bottom-32 left-20 w-6 h-6 border-2 border-white/20 dark:border-white/10 rounded-full"
             animate={{ scale: [1, 1.5, 1] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -1075,14 +1075,14 @@ export default function FinalYearProjectSupportPage() {
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.8 }}
             >
-              <h2 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
+              <h2 className="text-5xl md:text-7xl font-bold text-white dark:text-gray-100 mb-8 leading-tight">
                 Ready to Transform Your
                 <br />
-                <span className="bg-gradient-to-r from-yellow-300 via-white to-yellow-300 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-yellow-300 via-white to-yellow-300 dark:from-yellow-200 dark:via-gray-100 dark:to-yellow-200 bg-clip-text text-transparent">
                   Research Journey?
                 </span>
               </h2>
-              <p className="text-2xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+              <p className="text-2xl text-white/90 dark:text-gray-200/90 max-w-4xl mx-auto leading-relaxed">
                 Join thousands of successful students who have achieved academic excellence
                 with our comprehensive support system. Your success story starts here.
               </p>
@@ -1103,7 +1103,7 @@ export default function FinalYearProjectSupportPage() {
               >
                 <Button
                   size="lg"
-                  className="bg-white text-amber-600 hover:bg-gray-50 px-12 py-6 rounded-2xl text-xl font-bold shadow-2xl hover:shadow-white/25 transition-all duration-500 group"
+                  className="bg-white text-amber-600 hover:bg-gray-50 dark:bg-gray-100 dark:text-amber-700 dark:hover:bg-gray-200 px-12 py-6 rounded-2xl text-xl font-bold shadow-2xl hover:shadow-white/25 transition-all duration-500 group"
                   asChild
                 >
                   <Link href="/apply/final-year-project">
@@ -1121,7 +1121,7 @@ export default function FinalYearProjectSupportPage() {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-12 py-6 rounded-2xl text-xl font-bold"
+                  className="border-2 border-white/30 dark:border-white/40 text-white dark:text-gray-100 hover:bg-white/10 dark:hover:bg-white/20 backdrop-blur-sm px-12 py-6 rounded-2xl text-xl font-bold"
                 >
                   <Brain className="mr-4 h-7 w-7" />
                   View Sample Projects
@@ -1135,7 +1135,7 @@ export default function FinalYearProjectSupportPage() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-8 text-white/90"
+              className="grid grid-cols-2 md:grid-cols-4 gap-8 text-white/90 dark:text-gray-200/90"
             >
               {[
                 { icon: CheckCircle, text: "Expert Guidance" },
@@ -1149,7 +1149,7 @@ export default function FinalYearProjectSupportPage() {
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-colors duration-300">
+                  <div className="w-12 h-12 rounded-full bg-white/20 dark:bg-white/30 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 dark:group-hover:bg-white/40 transition-colors duration-300">
                     <item.icon className="h-6 w-6" />
                   </div>
                   <span className="font-semibold">{item.text}</span>
@@ -1163,7 +1163,7 @@ export default function FinalYearProjectSupportPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.8, duration: 0.8 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-8 text-white/80 text-lg border-t border-white/20 pt-8"
+              className="flex flex-col sm:flex-row items-center justify-center gap-8 text-white/80 dark:text-gray-200/80 text-lg border-t border-white/20 dark:border-white/30 pt-8"
             >
               <div className="flex items-center gap-3">
                 <div className="flex">

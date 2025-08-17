@@ -142,7 +142,7 @@ export default function InnovationLabPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50 overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50 dark:from-blue-950/50 dark:via-purple-950/50 dark:to-indigo-950/50 overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
@@ -158,19 +158,19 @@ export default function InnovationLabPage() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
               >
-                <div className="p-3 bg-blue-100 rounded-full mr-4">
+                <div className="p-3 bg-blue-100 dark:bg-blue-900/50 rounded-full mr-4">
                   <Cpu className="h-8 w-8 text-blue-600" />
                 </div>
                 <span className="text-blue-600 font-semibold text-lg">Innovation Hub</span>
               </motion.div>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6 bg-gradient-to-r from-gray-900 to-blue-600 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-6xl mb-6 bg-gradient-to-r from-gray-900 to-blue-600 dark:from-gray-100 dark:to-blue-400 bg-clip-text text-transparent">
                 Innovation & Technology Lab
               </h1>
               <p className="text-xl leading-8 text-muted-foreground mb-6">
                 Empower your innovation to compete globally and solve real problems. Access cutting-edge labs, expert mentorship, and resources to turn your ideas into reality.
               </p>
-              <div className="bg-gradient-to-r from-blue-100 to-purple-100 p-4 rounded-lg mb-8">
-                <p className="text-lg font-semibold text-gray-800">
+              <div className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50 p-4 rounded-lg mb-8">
+                <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
                   "Got an idea? Let's make it real."
                 </p>
               </div>
@@ -186,11 +186,7 @@ export default function InnovationLabPage() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Link href="#services">
-                  <Button variant="outline" size="lg" className="border-2">
-                    Explore Services
-                  </Button>
-                </Link>
+         
               </motion.div>
             </motion.div>
             {/* Right Visual */}
@@ -210,7 +206,7 @@ export default function InnovationLabPage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
                 {/* Floating Stats */}
-                <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-lg p-4">
+                <div className="absolute -bottom-6 -left-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
                   <div className="flex items-center space-x-2">
                     <Rocket className="h-6 w-6 text-blue-600" />
                     <div>
@@ -219,7 +215,7 @@ export default function InnovationLabPage() {
                     </div>
                   </div>
                 </div>
-                <div className="absolute -top-6 -right-6 bg-white rounded-xl shadow-lg p-4">
+                <div className="absolute -top-6 -right-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
                   <div className="flex items-center space-x-2">
                     <Trophy className="h-6 w-6 text-purple-600" />
                     <div>
@@ -235,7 +231,7 @@ export default function InnovationLabPage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
@@ -246,7 +242,7 @@ export default function InnovationLabPage() {
           >
             {stats.map((stat, index) => (
               <motion.div key={index} variants={itemVariants}>
-                <Card className="text-center border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <Card className="text-center border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
                   <CardContent className="p-6">
                     <stat.icon className={`h-12 w-12 mx-auto mb-4 ${stat.color}`} />
                     <h3 className="text-3xl font-bold mb-2">{stat.value}</h3>
@@ -260,7 +256,7 @@ export default function InnovationLabPage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-gray-50">
+      <section id="services" className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -286,9 +282,9 @@ export default function InnovationLabPage() {
           >
             {services.map((service, index) => (
               <motion.div key={index} variants={itemVariants}>
-                <Card className="h-full hover:shadow-lg transition-shadow duration-300 border-0 shadow-md">
+                <Card className="h-full hover:shadow-lg transition-shadow duration-300 border-0 shadow-md dark:bg-gray-700">
                   <CardHeader>
-                    <div className="p-3 bg-blue-100 rounded-full w-fit mb-4">
+                    <div className="p-3 bg-blue-100 dark:bg-blue-900/50 rounded-full w-fit mb-4">
                       <service.icon className="h-6 w-6 text-blue-600" />
                     </div>
                     <CardTitle className="text-xl">{service.title}</CardTitle>
@@ -306,7 +302,7 @@ export default function InnovationLabPage() {
       </section>
 
       {/* Target Audience Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-gray-900">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -332,9 +328,9 @@ export default function InnovationLabPage() {
           >
             {audience.map((item, index) => (
               <motion.div key={index} variants={itemVariants}>
-                <Card className="text-center h-full hover:shadow-lg transition-shadow duration-300">
+                <Card className="text-center h-full hover:shadow-lg transition-shadow duration-300 dark:bg-gray-800">
                   <CardHeader>
-                    <div className="p-4 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full w-fit mx-auto mb-4">
+                    <div className="p-4 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/50 dark:to-purple-900/50 rounded-full w-fit mx-auto mb-4">
                       <item.icon className="h-8 w-8 text-blue-600" />
                     </div>
                     <CardTitle className="text-xl">{item.title}</CardTitle>
@@ -352,7 +348,7 @@ export default function InnovationLabPage() {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-950/50 dark:to-purple-950/50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
@@ -379,7 +375,7 @@ export default function InnovationLabPage() {
             {process.map((step, index) => (
               <motion.div key={index} variants={itemVariants} className="text-center">
                 <div className="relative">
-                  <div className="p-4 bg-white rounded-full shadow-lg w-fit mx-auto mb-4">
+                  <div className="p-4 bg-white dark:bg-gray-800 rounded-full shadow-lg w-fit mx-auto mb-4">
                     <step.icon className="h-8 w-8 text-blue-600" />
                   </div>
                   <div className="absolute -top-2 -right-2 bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
